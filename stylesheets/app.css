@@ -1,0 +1,50 @@
+/* Artfully masterminded by ZURB  */
+
+/* --------------------------------------------------
+   Table of Contents
+-----------------------------------------------------
+:: Shared Styles
+:: Page Name 1
+:: Page Name 2
+*/
+
+
+/* -----------------------------------------
+   Shared Styles
+----------------------------------------- */
+
+div.header {
+  background: transparent url(../images/ffhl-logo.png) no-repeat bottom right;
+  min-height: 110px;
+}
+
+@media only screen and (max-width: 570px) {
+  div.header {
+    background: transparent !important;
+    min-height: 0px;
+  }
+}
+
+footer {
+  background: #fafafa;
+  margin-top: 1em;
+  padding: 1em 0;
+}
+
+div.teaser {
+  background: #333;
+  padding-top: 1em;
+}
+
+/* -----------------------------------------
+   Page Name 1
+----------------------------------------- */
+
+
+
+
+/* -----------------------------------------
+   Page Name 2
+----------------------------------------- */
+
+
