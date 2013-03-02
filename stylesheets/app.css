@@ -34,6 +34,17 @@ footer {
 div.teaser {
   background: #333;
   padding-top: 1em;
+  margin-bottom: 1em;
+}
+
+div.heading {
+  background: #333;
+  color: #fff;
+  margin-bottom: 1.4em;
+}
+
+div.heading * {
+  color: #fff;
 }
 
 /* -----------------------------------------
