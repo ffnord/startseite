@@ -6,11 +6,23 @@ layout: base
 
 <div class="teaser">
   <div class="row">
-    <div class="twelve columns">
+    <div class="eight columns">
       <div id="featured">
         <img src="images/featured/demo1.jpg" width=910 height=400 />
         <img src="images/featured/demo2.jpg" width=910 height=400 />
         <img src="images/featured/demo3.jpg" width=910 height=400 />
+      </div>
+    </div>
+    <div class="four columns">
+      <div class="panel">
+        <p>
+          <a href="/mitmachen.html" class="button large expand">
+            Mitmachen!
+          </a>
+        </p>
+        <p>
+        Um aktiv am Freifunk Projekt teilzunehmen ist es lediglich nötig einen passenden WLAN-Router zu erwerben und ihn in der Wohnung aufzustellen.
+        </p>
       </div>
     </div>
   </div>
@@ -19,32 +31,21 @@ layout: base
 <div class="row">
 
   <div class="eight columns">
-    <div class="row">
-      <h4>Was ist Freifunk?</h4>
-      <p>
-      Freifunk ist ein Projekt, das versucht ein stadtweites Datennetz auf Basis von WLAN-Routern aufzubauen.
-      Dieses Netz soll eine freie Kommunikation innerhalb der ganzen Stadt und, mithilfe von Peerings zu anderen Städten, auch überregional ermöglichen.
-      Um dies zu Erreichen, werden Freifunknoten (das sind die Router mit den Antennen), von freiwilligen an vielen Orten in der Stadt betrieben.
-      Jedes WLAN-fähige Gerät, also beispielsweise Handy oder Notebook, kann sich in der Nähe eines solchen Knotens mit dem Netz verbinden und darüber mit anderen Teilnehmern kommunizieren.
-      Auch ein Zugang ins Internet steht meistens zur Verfügung.
-      </p>
-    </div>
+    <h2>Was ist Freifunk?</h2>
+    <p>
+    Freifunk ist ein Projekt, das versucht ein stadtweites Datennetz auf Basis von WLAN-Routern aufzubauen.
+    Dieses Netz soll eine freie Kommunikation innerhalb der ganzen Stadt und, mithilfe von Peerings zu anderen Städten, auch überregional ermöglichen.
+    Um dies zu Erreichen, werden Freifunknoten (das sind die Router mit den Antennen), von freiwilligen an vielen Orten in der Stadt betrieben.
+    Jedes WLAN-fähige Gerät, also beispielsweise Handy oder Notebook, kann sich in der Nähe eines solchen Knotens mit dem Netz verbinden und darüber mit anderen Teilnehmern kommunizieren.
+    Auch ein Zugang ins Internet steht meistens zur Verfügung.
+    </p>
   </div>
 
   <div class="four columns">
-    <div class="panel">
-      <p>
-        <a href="/mitmachen.html" class="button large expand">
-          Mitmachen!
-        </a>
-      </p>
-      <p>
-      Um aktiv am Freifunk Projekt teilzunehmen ist es lediglich nötig einen passenden WLAN-Router zu erwerben und ihn in der Wohnung aufzustellen.
-      Dieser Knoten wird sich von dort mit anderen Knoten in der Nähe verbinden.
-      Sollte sich noch kein weiterer Freifunkknoten in der Nähe befinden, besteht die Möglichkeit eine verschlüsselte Verbindung über das Internet aufzubauen.
-      Hierbei besteht keine Gefahr, dass dritte den eigenen Internetanschluss nutzen könnten:
-      Alle Daten werden durch eine verschlüsselte Verbindung getunnelt und es besteht keine Möglichkeit Freifunkdatenverkehr einem Internetanschluss zuzuordnen.
-      </p>
-    </div>
+    {% for post in site.posts limit: 8 %}
+    <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+    <p>{{ post.teaser }}</p>
+    <p class="postdate"><em>{{ post.date | date: "%B %d, %Y" }}</em></p>
+    {% endfor %}
   </div>
 </div>

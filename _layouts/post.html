@@ -1,0 +1,19 @@
+---
+layout: base
+---
+
+<div class="heading">
+  <div class="row">
+    <div class="twelve columns">
+      <h1>{{ page.title }}
+        <span="postdate">{{ page.date | date: "%B %d, %Y" }}</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="twelve columns">
+    {{ content }}
+  </div>
+</div>
