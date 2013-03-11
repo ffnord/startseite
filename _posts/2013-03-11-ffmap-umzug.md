@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Karte und Graph umgezogen
-teaser: Diese liegen jetzt auf krtek.
+teaser: Bitte Links und Browser-Lesezeichen aktualisieren.
 ---
 
 Die neuen Adressen für Karte und Graph sind:
