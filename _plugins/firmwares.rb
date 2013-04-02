@@ -3,7 +3,7 @@ require 'uri'
 require 'nokogiri'
 
 FIRMWARE_REGEX = /^(\w+)-([\d.]+)-\w+-\w+-([\w-]+)-squashfs-factory.bin$/
-FIRMWARE_BASE = "http://metameute.de/~freifunk/firmware/0.3.2/"
+FIRMWARE_BASE = "http://metameute.de/~freifunk/firmware/0.3.2.1/"
 HWREV_REGEX = /^(.+)-v(\d+)$/
 
 MODELMAP = {
