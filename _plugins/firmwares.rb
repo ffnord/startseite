@@ -12,7 +12,7 @@ MODELMAP = {
   "tl-wdr3600"  => { :make => "TP-Link", :model => "TL-WDR3600" },
   "tl-wdr4300"  => { :make => "TP-Link", :model => "TL-WDR4300" },
   "tl-wr1043nd" => { :make => "TP-Link", :model => "TL-WR1043ND" },
-  "tl-wr740n"   => { :make => "TP-Link", :model => "TL-WR74)N" },
+  "tl-wr740n"   => { :make => "TP-Link", :model => "TL-WR741N" },
   "tl-wr741nd"  => { :make => "TP-Link", :model => "TL-WR741ND" },
   "tl-wr841n"   => { :make => "TP-Link", :model => "TL-WR841N" },
   "tl-wr841nd"  => { :make => "TP-Link", :model => "TL-WR841ND" },
