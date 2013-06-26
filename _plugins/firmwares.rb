@@ -14,7 +14,7 @@ MODELMAP = {
   "tl-wr1043nd" => { :make => "TP-Link", :model => "TL-WR1043ND" },
   "tl-wr740n"   => { :make => "TP-Link", :model => "TL-WR741N" },
   "tl-wr741nd"  => { :make => "TP-Link", :model => "TL-WR741ND" },
-  "tl-wr841n"   => { :make => "TP-Link", :model => "TL-WR841N" },
+  "tl-wr841n"   => { :make => "TP-Link", :model => "TL-WR841ND" },
   "tl-wr841nd"  => { :make => "TP-Link", :model => "TL-WR841ND" },
   "tl-wr842n"   => { :make => "TP-Link", :model => "TL-WR842N" }
 }
@@ -93,15 +93,20 @@ module Jekyll
       end
 
       models = firmwares.group_by do |fw|
-        fw.model
+        ModelDB.model(fw.model)
       end
 
       makes = models.group_by do |k,v|
-        ModelDB.make(k)
+        ModelDB.make(v.first.model)
       end
 
       makes.each do |k,models|
-        makes[k] = Hash[models.map do |k,v| [ModelDB.model(k) || k, v] end ]
+        makes[k] = Hash[ models.map do |k,v| 
+          [ModelDB.model(k) || k, v.sort_by do |f| 
+            f.hwrev
+          end
+          ] 
+        end ]
       end
 
       site.firmwares = makes
