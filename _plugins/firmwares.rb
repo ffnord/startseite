@@ -40,7 +40,7 @@ module Jekyll
     attr_accessor :hwrev
 
     def to_liquid
-      { 
+      {
         "url" => url,
         "filename" => filename,
         "version" => version,
@@ -53,7 +53,7 @@ module Jekyll
     end
   end
 
-  class FirmwareListGenerator < Generator 
+  class FirmwareListGenerator < Generator
     def generate(site)
       class << site
         attr_accessor :firmwares
@@ -101,11 +101,11 @@ module Jekyll
       end
 
       makes.each do |k,models|
-        makes[k] = Hash[ models.map do |k,v| 
-          [ModelDB.model(k) || k, v.sort_by do |f| 
+        makes[k] = Hash[ models.map do |k,v|
+          [ModelDB.model(k) || k, v.sort_by do |f|
             f.hwrev
           end
-          ] 
+          ]
         end ]
       end
 
