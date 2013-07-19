@@ -1,0 +1,39 @@
+{
+  "name": "Freifunk Lübeck",
+  "url": "https://luebeck.freifunk.net/",
+  "state": {
+    "lastchange": 1374226369
+  },
+  "location": {
+    "city": "Lübeck",
+    "lat": 53.869722,
+    "lon": 10.686389
+  },
+  "contact": {
+    "email": "info@luebeck.freifunk.net",
+    "irc": "irc://hackint/%23ffhl",
+    "ml": "freifunk.luebeck@asta.uni-luebeck.de ",
+    "phone": "meute@sip.ffhl"
+  },
+  "techDetails": {
+    "firmware": {
+      "url": "http://luebeck.freifunk.net/mitmachen.html"
+    },
+    "networks": {
+      "ipv6": [
+        {
+          "prefix": "fdef:ffc0:3dd7::/48"
+        }
+      ],
+      "ipv4": [
+        {
+          "network": "10.130.0.0/16"
+        }
+      ]
+    },
+    "routing": "batman-adv",
+    "updatemode": "manual",
+    "vpn": "fastd"
+  },
+  "api": "0.1"
+}
