@@ -7,7 +7,7 @@ FIRMWARE_BASE = "http://metameute.de/~freifunk/firmware/0.3.2.1/"
 HWREV_REGEX = /^(.+)-v(\d+)$/
 
 MODELMAP = {
-  "ubnt-bullet-m" => { :make => "Ubiquity", :model => "Bullet M" },
+  "ubnt-bullet-m" => { :make => "Ubiquiti", :model => "Bullet M" },
 
   "tl-wdr3600"  => { :make => "TP-Link", :model => "TL-WDR3600" },
   "tl-wdr4300"  => { :make => "TP-Link", :model => "TL-WDR4300" },
