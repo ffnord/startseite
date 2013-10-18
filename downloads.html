@@ -1,0 +1,59 @@
+---
+layout: base
+---
+
+<div class="heading">
+  <div class="row">
+    <div class="twelve columns">
+      <h1>Mitmachen!</h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="eight columns">
+    <p>Schön, dass du dich entschlossen hast einen Freifunkknoten aufzustellen. Hier findest du die benötigte Firmware für deinen neuen Knoten. Bitte beachte, dass bei einigen Modellen verschiedene Hardwarerevisionen existieren!</p>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="eight columns">
+    {% for makes in site.firmwares %}
+    <h2>{{ makes[0] }}</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for model in makes[1] %}
+        <tr>
+          <td>
+            {{ model[0] }}
+          </td>
+          <td>
+            {% for fw in model[1] %}
+            {% if model[1].size > 1 %}
+            <strong>v{{ fw.hwrev }}:</strong>
+            {% endif %}
+            <a href="{{ fw.url }}">{{ fw.filename }}</a><br/>
+            {% endfor %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endfor %}
+  </div>
+  <div class="four columns panel">
+    <h5>Hardware Versionen</h5>
+    <p>Bei einigen Modellen gibt es mehrere Hardware Versionen. Ist dies bei deinem Modell der Fall, musst du die entsprechende Firmware anhand des Typenschilds unter dem Knoten auswählen.</p>
+    <p>Dieses Bild zeigt das Typenschild eines TP-Link TL-WR1043ND. Die Versionsangabe ist gelb markiert:</p>
+    <a href="images/hardwareversion.png">
+      <img src="images/hardwareversion.png" />
+    </a>
+  </div>
+</div>
