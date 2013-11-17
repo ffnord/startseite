@@ -8,6 +8,7 @@ HWREV_REGEX = /^(.+)-v(\d+)$/
 
 MODELMAP = {
   "ubnt-bullet-m" => { :make => "Ubiquiti", :model => "Bullet M" },
+  "ubnt-unifi" => { :make => "Ubiquiti", :model => "UniFi AP" },
 
   "tl-wdr3600"  => { :make => "TP-Link", :model => "TL-WDR3600" },
   "tl-wdr4300"  => { :make => "TP-Link", :model => "TL-WDR4300" },
