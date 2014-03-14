@@ -17,10 +17,11 @@ kennenlernen und selber zum Mitmacher werden.
 Außerdem haben wir neben der sozialen Vernetzung zwei weitere Anlässe:
 
 Der Release der nächsten Firmware-Version für unsere Freifunk-Knoten wird
-hier stattfinden. Codename: "Gluon". Ihr könnt gerne eure Geräte mitbringen
-und wir aktualisieren die dann gemeinsam. Oder ihr könnt auch vor Ort Geräte 
-mit dieser brandneuen Firmware direkt erwerben. Auch Neuerungen
-von "Gluon" werden wir vorstellen und erklären.
+hier stattfinden. Codename: "[Gluon](https://github.com/freifunk-gluon/gluon".
+Ihr könnt gerne eure Geräte mitbringen und wir aktualisieren die dann
+gemeinsam. Oder ihr könnt auch vor Ort Geräte mit dieser brandneuen
+Firmware direkt erwerben. Auch Neuerungen von "Gluon" werden wir
+vorstellen und erklären.
 
 Zum Zweiten werden wir den Lübecker Bürgerschaftsbeschluss zu Freifunk
 befeiern und ein wenig Strategiebesprechung am Lagerfeuer hierzu
