@@ -32,4 +32,5 @@ für alle mitzubringen. Denn wie beim Freifunk üblich gilt: Sharing is caring :
 
 Weitere Informationen (bitte tragt euch auch in die Teilnehmerliste
 ein, falls ihr kommt):
+
 https://luebeck.freifunk.net/wiki/Release-Party-28.03.2014
