@@ -24,8 +24,7 @@ Firmware direkt erwerben. Auch Neuerungen von "Gluon" werden wir
 vorstellen und erklären.
 
 Zum Zweiten werden wir den Lübecker Bürgerschaftsbeschluss zu Freifunk
-befeiern und ein wenig Strategiebesprechung am Lagerfeuer hierzu
-machen.
+befeiern und ein wenig Strategiebesprechung hierzu machen.
 
 
 Wer kommen möchte, wird gebeten ein wenig was für ein Buffet und den Grill
