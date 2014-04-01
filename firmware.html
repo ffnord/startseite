@@ -25,7 +25,8 @@ layout: base
       <thead>
         <tr>
           <th>Model</th>
-          <th>Download</th>
+          <th>Erstinstallation</th>
+          <th>Upgrade</th>
         </tr>
       </thead>
       <tbody>
@@ -39,7 +40,15 @@ layout: base
             {% if model[1].size > 1 %}
             <strong>v{{ fw.hwrev }}:</strong>
             {% endif %}
-            <a href="{{ fw.url }}">{{ fw.filename }}</a><br/>
+            <a href="{{ fw.factory }}">factory-{{ fw.version }}</a><br/>
+            {% endfor %}
+          </td>
+          <td>
+            {% for fw in model[1] %}
+            {% if model[1].size > 1 %}
+            <strong>v{{ fw.hwrev }}:</strong>
+            {% endif %}
+            <a href="{{ fw.sysupgrade }}">sysupgrade-{{ fw.version }}</a><br/>
             {% endfor %}
           </td>
         </tr>
