@@ -4,7 +4,7 @@ require 'nokogiri'
 require 'pp'
 
 FIRMWARE_REGEX = /^gluon-((\w+)-([\d.]+)-([\w-]+)).bin$/
-FIRMWARE_BASE = "http://luebeck.freifunk.net/firmware/stable/"
+#firmware_base = "http://luebeck.freifunk.net/firmware/stable/"
 HWREV_REGEX = /^(.+)-v(\d+)$/
 
 MODELMAP = {
@@ -88,14 +88,16 @@ module Jekyll
         end
       end
 
-      factory = get_files(FIRMWARE_BASE + "factory/")
-      sysupgrade = get_files(FIRMWARE_BASE + "sysupgrade/")
+      firmware_base = site.config['firmware']['base']
+
+      factory = get_files(firmware_base + "factory/")
+      sysupgrade = get_files(firmware_base + "sysupgrade/")
 
       firmwares = Hash.new
 
       factory.each do |href|
         fw = Firmware.new
-        fw.factory = FIRMWARE_BASE + "factory/" + href
+        fw.factory = firmware_base + "factory/" + href
 
         href.match(FIRMWARE_REGEX) do |m|
           fw.basename = m[1]
@@ -112,7 +114,7 @@ module Jekyll
       end
 
       sysupgrade.each do |href|
-        path = FIRMWARE_BASE + "sysupgrade/" + href
+        path = firmware_base + "sysupgrade/" + href
 
         href.match(FIRMWARE_REGEX) do |m|
           basename = m[1].chomp "-sysupgrade"
