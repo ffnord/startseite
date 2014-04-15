@@ -1,7 +1,7 @@
-luebeck.freifunk.net
+ffnord startseite
 ====================
 
-Homepage of the Freifunk Lübeck project.
+Generic Homepage for FreiFunk Nord
 
 Dependencies
 ------------
