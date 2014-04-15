@@ -11,7 +11,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>Freifunk Lübeck</title>
+  <title>Freifunk {{ site.community.name }}</title>
 
   <!-- Included CSS Files (Uncompressed) -->
   <!--
@@ -34,17 +34,18 @@
 
   <!-- Header and Nav -->
 
+
   <div class="row header">
     <div class="nine columns">
       <h1>
-        Freifunk Lübeck
+        Freifunk {{ site.community.name }}
       </h1>
 
       <ul class="link-list">
         <li><a href="/">Home</a></li>
         <li><a href="/mitmachen.html">Mitmachen!</a></li>
         <li><a href="/treffen.html">Treffen</a></li>
-        <li><a href="/wiki">Wiki</a></li>
+        <li><a href="{{ site.community.url_wiki }}">Wiki</a></li>
       </ul>
     </div>
 
@@ -59,22 +60,27 @@
       <div class="six columns">
         <h5>Kontakt</h5>
         <p>
-          <strong>E-Mail:</strong> <a href="mailto:info@luebeck.freifunk.net">info@luebeck.freifunk.net</a> <br/>
-          <strong>Mailingliste:</strong> <a href="http://lists.asta.uni-luebeck.de/mailman/listinfo/freifunk.luebeck">freifunk.luebeck@asta.uni-luebeck.de</a> <br/>
-          <strong>SIP:</strong> meute@sip.ffhl bzw. meute@10.130.0.12<br/>
-          <strong>IRC:</strong> #ffhl im <a href="http://hackint.eu/">hackint</a><br/>
-          <strong>Twitter:</strong> <a href="https://twitter.com/FreifunkLuebeck">@freifunkluebeck</a><br/>
+        <strong>E-Mail:</strong> <a href="mailto:{{ site.community.mail_info}}">{{ site.community.mail_info }}</a> <br/>
+        <strong>Mailingliste:</strong> <a href="{{ site.community.url_mailman }}">{{ site.community.mail_discussion }}</a> <br/>
+          {% if site.community contains 'sip' %}
+          <strong>SIP:</strong>
+            {% for sip in site.community.sip %}
+            {{ sip }}{% if forloop.rindex > 2 %}, {% else %}{%if forloop.rindex == 2%} oder {% endif %}{% endif %}{% endfor %} <br/>
+          {% endif %}
+          <strong>IRC:</strong> {{ site.community.irc }} im <a href="http://hackint.eu/">hackint</a><br/>
+          {% if site.community contains 'twitter' %}
+          <strong>Twitter:</strong> <a href="https://twitter.com/{{ site.community.twitter }}">@{{ site.community.twitter }}</a><br/>
+          {% endif %}
           <a href="/impressum.html">Impressum</a>
         </p>
       </div>
       <div class="four columns">
         <h5>Links</h5>
         <ul>
-          <li><a href="/wiki">Wiki</a></li>
-          <li><a href="/wiki/Knoten">Knotenliste</a></li>
-          <li><a href="http://metameute.de/nodegame">Knoten Highscores</a></li>
-          <li><a href="/map/graph.html">Netzgraph</a></li>
-          <li><a href="/map/geomap.html">Knotenkarte</a></li>
+          <li><a href="{{ site.community.url_wiki }}">Wiki</a></li>
+          <li><a href="{{ site.community.url_nodelist }}">Knotenliste</a></li>
+          <li><a href="{{ site.community.url_graph }}">Netzgraph</a></li>
+          <li><a href="{{ site.community.url_geomap }}">Knotenkarte</a></li>
         </ul>
       </div>
       <div class="four columns">

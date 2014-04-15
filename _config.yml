@@ -1,0 +1,25 @@
+community:
+  # Metadata
+  name: "Entenhausen"
+
+  # Custom URLs
+  url_wiki:  "/wiki"
+  url_geomap: "/map/geomap.html"
+  url_graph: "/map/graph.html"
+  url_nodelist: "/wiki/Knoten"
+  url_mailman: "http://lists.entenhausen.freifunk.net/mailman/listinfo/list"
+
+  # Mail Contacts
+  mail_info: "info@entenhausen.freifunk.net"
+  mail_discussion: "discussion@entenhausen.freifunk.net"
+
+  # Other Contacts
+  sip: ["space@sip.ffeh", "space@10.254.254.254"] # Optional
+  twitter: "FreifunkEntenhausen" # Optional
+  irc: "#ffeh"
+
+firmware:
+  base: "http://luebeck.freifunk.net/firmware/stable/"
+
+  gluon_site: "https://github.com/freifunk-entenhausen/site-ffeh"
+
