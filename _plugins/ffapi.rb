@@ -4,6 +4,7 @@ module Jekyll
       date.to_i
     end
   end
+
   class FreifunkAPIPage < Page
     def initialize(site, base, dir,name)
       @site = site
