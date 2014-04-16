@@ -1,4 +1,9 @@
 module Jekyll
+  module Filters
+    def date_to_stamp(date)
+      date.to_i
+    end
+  end
   class FreifunkAPIPage < Page
     def initialize(site, base, dir,name)
       @site = site

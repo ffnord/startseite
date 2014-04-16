@@ -1,3 +1,5 @@
+url: http://entenhausen.freifunk.net
+
 community:
   # Metadata
   name: "Entenhausen"
@@ -18,8 +20,11 @@ community:
   twitter: "FreifunkEntenhausen" # Optional
   irc: "#ffeh"
 
+  # GPS
+  geo_lat: 53.869722
+  geo_lon: 10.686389
+
 firmware:
   base: "http://luebeck.freifunk.net/firmware/stable/"
 
   gluon_site: "https://github.com/freifunk-entenhausen/site-ffeh"
-

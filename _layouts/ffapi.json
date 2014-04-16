@@ -1,23 +1,23 @@
 {
-  "name": "Freifunk Lübeck",
-  "url": "https://luebeck.freifunk.net/",
+  "name": "Freifunk {{ site.community.name }}",
+  "url": "{{ site.url }}{{ site.baseurl }}"
   "state": {
-    "lastchange": 1374226369
+    "lastchange": {{ site.time | date_to_stamp }}
   },
   "location": {
-    "city": "Lübeck",
-    "lat": 53.869722,
-    "lon": 10.686389
+    "city": "{{ site.community.name }}",
+    "lat": {{ site.community.geo_lat }},
+    "lon": {{ site.community.geo_lon }}
   },
   "contact": {
-    "email": "info@luebeck.freifunk.net",
+    "email": "{{ site.community.mail_info }}
     "irc": "irc://hackint/%23ffhl",
-    "ml": "freifunk.luebeck@asta.uni-luebeck.de ",
-    "phone": "meute@sip.ffhl"
+    "ml": "{{ site.community.mail_discussion }}
+{% if site.community contains 'sip' %}    "phone": "{{ site.community.sip | first }}" {% endif %}
   },
   "techDetails": {
     "firmware": {
-      "url": "http://luebeck.freifunk.net/mitmachen.html"
+      "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html"
     },
     "networks": {
       "ipv6": [
