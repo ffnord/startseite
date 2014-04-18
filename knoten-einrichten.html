@@ -44,94 +44,98 @@ layout: base
 
     <p><strong>http://192.168.1.1</strong></p>
 
-    <p>Dein Browserfenster müsste nun aussehen, wie im folgenden Bild. Folge dem Link "Knoten neu einrichten". Er
-    führt dich durch die Schritte des Einrichtungsdialogs.</p>
+    <p>Dein Browserfenster müsste nun aussehen, wie im folgenden Bild. </p>
 
     <figure>
-      <img src="images/knoten-einrichten/g3522.png" />
+      <img src="images/knoten-einrichten/wizard-start.png" />
     </figure>
 
-    <h3>Schritt 3: Passwort</h3>
-
-    <p>Als erstes legst du ein Passwort fest:</p>
-
-    <figure>
-      <img src="images/knoten-einrichten/g3298.png" />
-    </figure>
-
-    <p>Das Passwort brauchst du, um dich später wieder an deinem Knoten anzumelden. Dies ist beispielsweise nötig,
-    wenn du das Freifunk-Betriebssystem (Firmware) auf dem Knoten aktualisieren willst. Schreib es dir also besser
-    irgendwo auf.</p>
-
-    <h3>Schritt 4: Knotenname</h3>
+    <h3>Schritt 3: Knotenname</h3>
 
     <p>Als Nächstes musst du deinem Knoten einen Namen geben. Nimm einfach einen, der dir gefällt und der
     vielleicht ein wenig über den Standort des Knotens aussagt. z.B. <em>FreeWayLan</em>. Bitte achte darauf, dass keine
     Leerzeichen im Namen erlaubt sind. Wenn du ein Leerzeichen brauchst, verwende einfach einen Unterstrich.
-    Dieser Name wird später noch einmal benötigt. Am besten öffnest du jetzt einen Texteditor und kopierst ihn dort
-    hinein.</p>
+    </p>
 
     <figure>
-      <img src="images/knoten-einrichten/g3522.png" />
+      <img src="images/knoten-einrichten/wizard-hostname.png" />
+      <figcaption>Feld zum Eintragen des Namens.</figcaption>
     </figure>
 
-    <h3>Schritt 5: Optionen</h3>
-
-    <p>Im nächsten Schritt kannst du noch zwei Optionen zur Funktionsweise deines Knotens festlegen. Diese sind:</p>
-
-    <figure>
-      <img src="images/knoten-einrichten/g3680.png" />
-      <figcaption>Option 1: Mesh-VPN, Option 2: Bandbreitenbegrenzung</figcaption>
-    </figure>
-
-    <h4>Option 1: Mesh-VPN</h4>
+    <h3>Schritt 4: Mesh-VPN</h3>
 
     <p>Setze diesen Haken, um eine verschlüsselte Verbindung über deinen Internet-Router zum Freifunk-Server
     herzustellen. Wir empfehlen, dies zu tun. Der Freifunk-Server verbindet deinen Freifunkknoten mit dem Internet
     und dem Teil des Freifunk-Netzes, der nicht über WLAN erreicht wird. Wenn diese Option nicht aktiviert wird,
     kann der Knoten nur mit den Knoten kommunizieren, die er direkt oder indirekt per WLAN oder über andere
     Knoten mit aktivierter Option erreicht. Der Zugang zum Internet ist dann nur möglich, wenn mindestens bei einem
-    der erreichbaren Knoten die Option aktiviert ist.</p>
+    der erreichbaren Knoten die Option aktiviert ist. Beim aktivieren wird die Option <em>"Mesh-VPN Bandbreite begrenzen"</em> sichtbar.</p>
 
     <figure>
-      <img src="images/knoten-einrichten/g3809.png" />
+      <img src="images/knoten-einrichten/wizard-meshvpn.png" />
     </figure>
 
-    <h4>Option 2: Bandbreitenbegrenzung</h4>
+    <h4>Option: Bandbreitenbegrenzung</h4>
 
     <p>Wenn du einen normalen Internet-Anschluss hast, brauchst du die Begrenzung nicht zu aktivieren. Dein Knoten
     wird im alltäglichen Betrieb nicht allzuviel von deiner Bandbreite in Anspruch nehmen. Unsere Empfehlung ist
     deshalb, die Begrenzung nicht zu aktivieren. Solltest du aber trotzdem eine Begrenzung eintragen wollen, setze
-    den Haken "Banbreitenbegrenzung aktivieren?" und trage in die beiden Felder darunter die gewünschten Limits
+    den Haken "Mesh-VPN Bandbreite begrenzen" und trage in die beiden Felder darunter die gewünschten Limits
     ein. Die Minimalwerte sind 1000 im oberen und 100 im unteren Feld.</p>
 
-    <h3>Schritt 6: Dein VPN-Schlüssel</h3>
+    <h3>Schritt 5: Standort</h3>
 
-    <p>Klicke wieder auf weiter. Nun bekommst Du einen VPN-Schlüssel angezeigt, der später zur Registrierung deines
-    Knotens im Freifunk-Netz gebraucht wird. Kopier ihn am besten ebenfalls in den Texteditor.</p>
-
-    <p>Sende diesen Schlüssel bitte an <a href="mailto:{{ site.community.mail_keys }}">{{ site.community.mail_keys }}</a> und teile uns ein paar Informationen zu deinem Knoten mit:
+    <p>Wenn du möchtest, dass du und andere Mitmenschen, den Standort deines Knotens in der <a href="{{ site.community.url_geomap }}">Karte</a> sehen können.
+    Dann kannst du diesen Haken setzen und die rot gefärbten Felder ausfüllen. Die Werte dazu kannst z.B. 
+    mit Hilfe des Knopfes <em>"Koordinaten beim nächsten Klick anzeigen"</em> in der <a href="{{ site.community.url_geomap }}">Karte</a> ermitteln.
     </p>
-    <ul>
-      <li>Knotenname</li>
-      <li>Standort (Stadt)</li>
-    </ul>
+
+    <figure>
+      <img src="images/knoten-einrichten/wizard-standort.png" />
+    </figure>
+
+    <h3>Schritt 6: Kontakt</h3>
+
+    <p>Um einen Knoten Betreiber erreichen zu können, braucht die Gemeinschaft eine Kontakt Möglichkeit.
+       Du kannst dazu in diesem Feld z.B. eine E-Mail Adresse eintragen oder einen Namen welcher von
+       anderen aktiven Freifunker zugeordneten werden kann. Beachte der hier eingetragene Wert wird öffentlich
+       einsehbar. Wenn Du magst kannst du hier auch mehrere Werte eintragen, trenne diese bitte mit einem Komma.
+       Wenn du unsicher bist dann lass dieses Feld leer, du kannst ihn auch später durch den <em>ConfigMode</em>
+       setzen.
+    </p>
+
+    <figure>
+      <img src="images/knoten-einrichten/wizard-kontakt.png" />
+    </figure>
+
+    <h3>Schritt 7: Knoten bekanntmachen</h3>
+
+    <p>Klicke auf <em>Fertig</em>.</p> 
+
+    <figure>
+      <img src="images/knoten-einrichten/wizard-fertig.png" />
+    </figure>
+
+    <p>
+    Die nun erscheinende Seite fasst zusammen was du als nächstes tun solltest. 
+    Hast du in Schritt 4 das Mesh-VPN aktiviert, dann zeigt die Seite wie in der Abbildung
+    einen eingerahmten Block an, welcher deinen Knoten Namen und den VPN-Schlüssel enthält.
+    Sende den Inhalt dieses Blocks an <a href="mailto:{{ site.community.mail_keys }}">{{ site.community.mail_keys }}</a>.
+    </p>
 
     <p>Es kann eine weile dauern bis dein Knoten online gehen kann, da der Schlüssel von uns manuell eingetragen werden muss.</p>
 
-    <h3>Schritt 7: Abschließen und Einstellungen speichern</h3>
-
-    <p>Dein Knoten ist nun fast fertig eingerichtet. Klick noch einmal auf weiter. Klicke danach auf „Jetzt Neustarten“,
-    um die Einstellungen zu speichern. Der Knoten startet daraufhin neu.</p>
-
-    <figure>
-      <img src="images/knoten-einrichten/g3937.png" />
-    </figure>
+    <p>
+    Hast du Mesh-VPN nicht aktiviert wird die Seite diese Daten nicht enthalten und du brauchst auch keine Mail versenden.
+    Wenn du möchtest kannst du dich und deinen neuen Knoten aber trotzdem gerne auf der 
+    Mailingliste <a href="mailto:{{ site.community.mail_discussion }}">{{ site.community.mail_discussion }}</a> bekannt machen.
+    </p>
 
     <figure>
-      <img src="images/knoten-einrichten/g3973.png" />
-      <figcaption>Diese Fehlermeldung kann ignoriert werden.</figcaption>
+      <img src="images/knoten-einrichten/wizard-geschafft.png" />
     </figure>
+
+    <p>Dein Knoten ist nun Fertig eingerichtet und startet bereits neu.</p>
 
     <h3>Schritt 8: Knoten ans Internet anschließen</h3>
 
@@ -160,7 +164,8 @@ layout: base
     im Ausland. Erschrick nicht, obwohl in machen Warnungen von „Hackerangriffen“ etc. die Rede ist. Das ist ganz
     normal und es soll auch so sein. Diese Maßnahme dient dem Schutz vor der Störerhaftung.</p>
 
-    <p>Vielen Dank an Rainer Sax, der uns die PDF Source zur Verfügung gestellt hat, und Sven Henning, der diese Anleitung an das Lübecker Projekt angepasst hat.</p>
+    <p>Vielen Dank an Rainer Sax, der uns die PDF Source zur Verfügung gestellt hat, und Sven Henning, der diese Anleitung an das Lübecker Projekt angepasst hat.
+    </p>
 
   </div>
 </div>
