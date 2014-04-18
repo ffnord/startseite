@@ -26,6 +26,7 @@ You should customize text in the following files:
 
  * treffen.html
  * mitmachen.html
+ * distributor.html
 
 Build
 -----
