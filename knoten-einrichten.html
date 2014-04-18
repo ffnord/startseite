@@ -14,7 +14,7 @@ layout: base
   <div class="twelve columns">
     <p>Für die Einrichtung des Knotens werden keine technischen Kenntnisse benötigt. Wenn du dieser Anleitung Schritt
     für Schritt folgst, kann eigentlich nichts schiefgehen. Wenn du fertig bist, läuft das Freifunk WLAN und ist für alle in
-    der Nähe als offenes WLAN mit der SSID "luebeck.freifunk.net" zu sehen.</p>
+    der Nähe als offenes WLAN mit der SSID "{{ site.gluon_site.wifi24.ssid }}" zu sehen.</p>
 
     <p>Dein Knoten sollte das Freifunk Betriebssystem bereits installiert haben. Ob das so ist, erfährst du von dem
     Freifunker, von dem du das Gerät bekommen hast. Wenn dein Knoten noch nicht das Freifunk-Betriebssystem
@@ -110,7 +110,7 @@ layout: base
     <p>Klicke wieder auf weiter. Nun bekommst Du einen VPN-Schlüssel angezeigt, der später zur Registrierung deines
     Knotens im Freifunk-Netz gebraucht wird. Kopier ihn am besten ebenfalls in den Texteditor.</p>
 
-    <p>Sende diesen Schlüssel bitte an <a href="mailto:keys@luebeck.freifunk.net">keys@luebeck.freifunk.net</a> und teile uns ein paar Informationen zu deinem Knoten mit:
+    <p>Sende diesen Schlüssel bitte an <a href="mailto:{{ site.community.mail_keys }}">{{ site.community.mail_keys }}</a> und teile uns ein paar Informationen zu deinem Knoten mit:
     </p>
     <ul>
       <li>Knotenname</li>

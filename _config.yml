@@ -13,6 +13,7 @@ community:
 
   # Mail Contacts
   mail_info: "info@entenhausen.freifunk.net"
+  mail_keys: "keys@entenhausen.freifunk.net"
   mail_discussion: "discussion@entenhausen.freifunk.net"
 
   # Other Contacts
