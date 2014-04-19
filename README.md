@@ -1,7 +1,7 @@
 ffnord startseite
 ====================
 
-Generic Homepage for FreiFunk Nord
+Generic Homepage for FreiFunk Nord.
 
 Dependencies
 ------------
@@ -27,6 +27,10 @@ You should customize text in the following files:
  * treffen.html
  * mitmachen.html
  * distributor.html
+
+Before you deploy the included "impressum.html" please contact
+the "Förderverein Freie Netzwerke e. V." and ask for their
+permission to do so. Thanks.
 
 Build
 -----
