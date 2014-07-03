@@ -16,7 +16,7 @@
     "irc": "irc://hackint/%23{{ site.community.irc }}",
     "ml": "{{ site.community.mail_discussion }}"
 {% if site.community contains 'sip' %}    ,"phone": "{{ site.community.sip | first }}" {% endif %}
-{% if site.community contains 'twitter' %}    ,"twitter": "{{ site.community.twitter | first }}" {% endif %}
+{% if site.community contains 'twitter' %}    ,"twitter": "@{{ site.community.twitter | first }}" {% endif %}
   },
   "nodeMaps": [
     {
@@ -41,7 +41,7 @@
   "techDetails": {
     "firmware": {
       "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html"
-      "name": "{{ site.fw.type }}"
+      "name": "{{ site.firmware.type }}"
     },
 {% if site contains 'tld' && site.tld contains 'label' %}    "tld": {
       "domainname": "{{ site.tld.label }}",
