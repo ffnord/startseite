@@ -18,6 +18,26 @@
 {% if site.community contains 'sip' %}    ,"phone": "{{ site.community.sip | first }}" {% endif %}
 {% if site.community contains 'twitter' %}    ,"twitter": "{{ site.community.twitter | first }}" {% endif %}
   },
+  "nodeMaps": [
+    {
+      "url": "{{ site.url }}{{ site.baseurl }}ffmap/geomap.html",
+      "interval": "300",
+      "technicalType": "ffmap",
+      "mapType": "geographical"
+    },
+    {
+      "url": "{{ site.url }}{{ site.baseurl }}ffmap/graph.html",
+      "interval": "300",
+      "technicalType": "ffmap",
+      "mapType": "structural"
+    },
+    {
+      "url": "{{ site.url }}{{ site.baseurl }}ffmap/list.html",
+      "interval": "300",
+      "technicalType": "ffmap",
+      "mapType": "list/status"
+    }
+  ],
   "techDetails": {
     "firmware": {
       "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html"
