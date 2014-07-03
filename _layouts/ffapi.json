@@ -1,7 +1,9 @@
 {
   "name": "Freifunk {{ site.community.name }}",
   "url": "{{ site.url }}{{ site.baseurl }}",
+{% if site.community contains 'meta' %}  "metacommunity": "{{ site.community.meta }}", {% endif %}
   "state": {
+    "nodes": 0,
     "lastchange": {{ site.time | date_to_stamp }}
   },
   "location": {
@@ -10,15 +12,23 @@
     "lon": {{ site.community.geo_lon }}
   },
   "contact": {
-    "email": "{{ site.community.mail_info }}
-    "irc": "irc://hackint/%23ffhl",
-    "ml": "{{ site.community.mail_discussion }}
-{% if site.community contains 'sip' %}    "phone": "{{ site.community.sip | first }}" {% endif %}
+    "email": "{{ site.community.mail_info }}",
+    "irc": "irc://hackint/%23{{ site.community.irc }}",
+    "ml": "{{ site.community.mail_discussion }}"
+{% if site.community contains 'sip' %}    ,"phone": "{{ site.community.sip | first }}" {% endif %}
+{% if site.community contains 'twitter' %}    ,"twitter": "{{ site.community.twitter | first }}" {% endif %}
   },
   "techDetails": {
     "firmware": {
       "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html"
+      "name": "{{ site.fw.type }}"
     },
+{% if site contains 'tld' && site.tld contains 'label' %}    "tld": {
+      "domainname": "{{ site.tld.label }}",
+{% if site contains 'tld' && site.tld contains 'ns' %}      "nameserver": [
+        "{{ site.tld.ns }}"
+      ] {% endif %}
+    }, {% endif %}
     "networks": {
       "ipv6": [
         {
@@ -31,9 +41,10 @@
         }
       ]
     },
+{% if site.community contains 'mail_keys' %}    "bootstrap": "{{ site.community.mail_keys | first }}", {% endif %}
     "routing": "batman-adv",
     "updatemode": "manual",
     "vpn": "fastd"
   },
-  "api": "0.1"
+  "api": "0.3.0"
 }
