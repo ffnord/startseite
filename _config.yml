@@ -3,6 +3,7 @@ url: http://entenhausen.freifunk.net
 community:
   # Metadata
   name: "Entenhausen"
+  meta: "Dysnie"
 
   # Custom URLs
   url_wiki:  "/wiki"
@@ -19,7 +20,7 @@ community:
   # Other Contacts
   sip: ["space@sip.ffeh", "space@10.254.254.254"] # Optional
   twitter: "FreifunkEntenhausen" # Optional
-  irc: "#ffeh"
+  irc: "ffeh"
 
   # GPS
   geo_lat: 53.869722
@@ -27,8 +28,13 @@ community:
 
 firmware:
   base: "http://luebeck.freifunk.net/firmware/stable/"
+  type: "gluon"
 
   # URL to the site repo (gitweb,github...)
   gluon_site: "https://github.com/freifunk-entenhausen/site-ffeh"
   # Path to local checkout of the site repo
   gluon_site_dir: "../gluon/site"
+
+tld:
+  label: "ffeh"
+  ns: ["10.255.255.255", "10.255.255.254", "10.255.255.253"]
