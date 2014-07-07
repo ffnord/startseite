@@ -1,40 +1,50 @@
-url: http://entenhausen.freifunk.net
+url: http://gothamcity.freifunk.net/
 
 community:
   # Metadata
-  name: "Entenhausen"
-  meta: "Dysnie"
+  name: "Gotham City"
+  meta: "ffgc"
 
   # Custom URLs
   url_wiki:  "/wiki"
   url_geomap: "/map/geomap.html"
   url_graph: "/map/graph.html"
   url_nodelist: "/wiki/Knoten"
-  url_mailman: "http://lists.entenhausen.freifunk.net/mailman/listinfo/list"
+  url_mailman: "http://lists.gothamcity.freifunk.net/mailman/listinfo/list"
 
   # Mail Contacts
-  mail_info: "info@entenhausen.freifunk.net"
-  mail_keys: "keys@entenhausen.freifunk.net"
-  mail_discussion: "discussion@entenhausen.freifunk.net"
+  mail_info: "info@gothamcity.freifunk.net"
+  mail_keys: "keys@gothamcity.freifunk.net"
+  mail_discussion: "discussion@gothamcity.freifunk.net"
 
   # Other Contacts
-  sip: ["space@sip.ffeh", "space@10.254.254.254"] # Optional
-  twitter: "FreifunkEntenhausen" # Optional
-  irc: "ffeh"
+  sip: ["space@sip.ffgc", "space@10.35.0.1"] # Optional
+  twitter: "FreiFunkGothamCity" # Optional
+  irc: "ircs://irc.hackint.net/ffgc"
 
   # GPS
-  geo_lat: 53.869722
-  geo_lon: 10.686389
+  geo_lat: 40.5
+  geo_lon: -74.1
 
 firmware:
-  base: "http://luebeck.freifunk.net/firmware/stable/"
+  base: "http://gothamcity.freifunk.net/firmware/stable/"
   type: "gluon"
 
   # URL to the site repo (gitweb,github...)
-  gluon_site: "https://github.com/freifunk-entenhausen/site-ffeh"
+  gluon_site: "https://github.com/freifunk-gothamcity/site-ffgc"
   # Path to local checkout of the site repo
   gluon_site_dir: "../gluon/site"
 
 tld:
-  label: "ffeh"
-  ns: ["10.255.255.255", "10.255.255.254", "10.255.255.253"]
+  label: "ffgc"
+  ns:
+    - "10.35.0.1"
+    - "fd35:f308:a922::ff00"
+    - "10.35.5.1"
+    - "fd35:f308:a922::ff01"
+    - "10.35.10.1"
+    - "fd35:f308:a922::ff02"
+    - "10.35.15.1"
+    - "fd35:f308:a922::ff03"
+    - "10.35.20.1"
+    - "fd35:f308:a922::ff04"
