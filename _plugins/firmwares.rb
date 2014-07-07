@@ -4,7 +4,6 @@ require 'nokogiri'
 require 'pp'
 
 FIRMWARE_REGEX = /^gluon-((\w+)-([\d.]+)-([\w-]+)).bin$/
-#firmware_base = "http://luebeck.freifunk.net/firmware/stable/"
 HWREV_REGEX = /^(.+)-v(\d+)$/
 
 MODELMAP = {
