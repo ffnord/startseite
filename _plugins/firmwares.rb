@@ -3,10 +3,13 @@ require 'uri'
 require 'nokogiri'
 require 'pp'
 
-FIRMWARE_REGEX = /^gluon-((\w+)-([\d.]+)-([\w-]+)).bin$/
-HWREV_REGEX = /^(.+)-v(\d+)$/
+FIRMWARE_REGEX = /^gluon-((\w+)-([\d\.]+)-([\w-]+)).bin$/
+HWREV_REGEX = /^(.+)-(v|rev-)(\w+)$/
 
 MODELMAP = {
+  "d-link-dir-615"         => { :make => "D-Link", :model => "DIR 615" },
+  "d-link-dir-825"         => { :make => "D-Link", :model => "DIR 825" },
+
   "ubiquiti-bullet-m"        => { :make => "Ubiquiti", :model => "Bullet M, Nanostation Loco M" },
   "ubiquiti-unifi"           => { :make => "Ubiquiti", :model => "UniFi AP (LR)" },
   "ubiquiti-nanostation-m"   => { :make => "Ubiquiti", :model => "Nanostation M" },
@@ -96,7 +99,7 @@ module Jekyll
 
           fw.model.match(HWREV_REGEX) do |m|
             fw.model = m[1]
-            fw.hwrev = m[2]
+            fw.hwrev = m[3]
           end
         end
 
