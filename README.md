@@ -45,6 +45,17 @@ so it is stored in the local folder `build` outside of this repository. If somet
 
 to have the data transferred without deleting independent contributions.
 
+Site
+----
+
+The site doesn't run in a subdirectory, it only works correctly if it is called via its own (sub)domain, so you have to configure your webserver to route a domain on the site-path, otherwise the links to stylesheets, images,.. are not implemented correctly, for example in apache add this to your sites-enabled:
+
+	<VirtualHost *:80>
+		ServerName freifunk.localhost
+		DocumentRoot /path/to/www/
+	</VirtualHost>
+
+
 Aftermath
 ---------
 
