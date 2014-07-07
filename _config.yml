@@ -3,7 +3,8 @@ url: http://gothamcity.freifunk.net/
 community:
   # Metadata
   name: "Gotham City"
-  meta: "ffgc"
+  meta: "Marvel"
+  country: "MC"
 
   # Custom URLs
   url_wiki:  "/wiki"

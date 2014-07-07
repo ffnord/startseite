@@ -8,6 +8,7 @@
   },
   "location": {
     "city": "{{ site.community.name }}",
+    "country": "{{ site.community.country }}",
     "lat": {{ site.community.geo_lat }},
     "lon": {{ site.community.geo_lon }}
   },
@@ -40,7 +41,7 @@
   ],
   "techDetails": {
     "firmware": {
-      "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html"
+      "url": "{{ site.url }}{{ site.baseurl }}mitmachen.html",
       "name": "{{ site.firmware.type }}"
     },
 {% if site contains 'tld' && site.tld contains 'label' %}    "tld": {
@@ -52,7 +53,7 @@
     "networks": {
       "ipv6": [
         {
-          "prefix": "{{ site.gluon_site.prefix6 }}"
+          "network": "{{ site.gluon_site.prefix6 }}"
         }
       ],
       "ipv4": [
@@ -62,9 +63,17 @@
       ]
     },
 {% if site.community contains 'mail_keys' %}    "bootstrap": "{{ site.community.mail_keys | first }}", {% endif %}
-    "routing": "batman-adv",
-    "updatemode": "manual",
-    "vpn": "fastd"
+    "routing": [
+      "batman-adv"
+    ],
+    "updatemode": [
+      "manual",
+      "autoupdate"
+    ],
+    "legals": [
+      "vpninternational",
+      "anonymizer"
+    ]
   },
-  "api": "0.3.0"
+  "api": "0.4.0"
 }
