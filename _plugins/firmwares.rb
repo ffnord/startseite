@@ -68,15 +68,6 @@ module Jekyll
 
   class FirmwareListGenerator < Generator
     def generate(site)
-      class << site
-        attr_accessor :firmwares
-        def site_payload
-          result = super
-          result["site"]["firmwares"] = self.firmwares
-          result
-        end
-      end
-
       def get_files(url)
         uri = URI.parse(url)
         response = Net::HTTP.get_response uri
@@ -142,7 +133,8 @@ module Jekyll
         end ]
       end
 
-      site.firmwares = makes
+      page = site.pages.detect {|page| page.name == 'firmware.html'}
+      page.data['makes'] = makes
     end
   end
 end
