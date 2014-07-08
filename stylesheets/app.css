@@ -18,6 +18,13 @@ div.header {
   min-height: 110px;
 }
 
+#flash_placeholder {
+  background:url('../images/flash_placeholder.png');
+  min-height:330px;
+  margin-bottom:10px;
+  background-repeat:no-repeat;
+}
+
 @media only screen and (max-width: 570px) {
   div.header {
     background: transparent !important;
