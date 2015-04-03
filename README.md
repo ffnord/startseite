@@ -60,6 +60,6 @@ Aftermath
 ---------
 
 There are several bits and pieces still missing after the installation of this startseite. 
- * map/graph/List from the ffnord/ffmap-d3 repository on github
+ * map/graph/list from the [ffnord/ffmap-backend](https://github.com/ffnord/ffmap-backend) repository on github
  * integration of the www-providing machine with the batman-adv mesh
  * mailing lists and email setup in general
