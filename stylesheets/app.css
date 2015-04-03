@@ -54,6 +54,11 @@ div.heading * {
   color: #fff;
 }
 
+h1 > .postdate {
+  font-size: 0.3em;
+  font-style: italic;
+}
+
 /* -----------------------------------------
    Page Name 1
 ----------------------------------------- */
