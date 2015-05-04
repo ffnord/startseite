@@ -84,14 +84,22 @@ module Jekyll
   class FirmwareListGenerator < Generator
     def generate(site)
       def get_files(url)
-        uri = URI.parse(url)
-        response = Net::HTTP.get_response uri
-        doc = Nokogiri::HTML(response.body)
-        doc.css('a').map do |link|
-          link.attribute('href').to_s
-        end.uniq.sort.select do |href|
-          href.match(FIRMWARE_REGEX)
+        begin
+            printf "Fetching avaiable firmware images from %s\n",url
+            uri = URI.parse(url)
+        rescue StandardError
+            printf "ERROR: The URL %s could not be resolved\n", url
         end
+        if uri
+            response = Net::HTTP.get_response uri
+            doc = Nokogiri::HTML(response.body)
+            doc.css('a').map do |link|
+              link.attribute('href').to_s
+            end.uniq.sort.select do |href|
+              href.match(FIRMWARE_REGEX)
+            end
+        end
+              
       end
 
       firmware_base = site.config['firmware']['base']
@@ -101,35 +109,44 @@ module Jekyll
 
       firmwares = Hash.new
 
-      factory.each do |href|
-        fw = Firmware.new
-        fw.factory = firmware_base + "factory/" + href
+      if factory.nil?
+          print "ERROR: no factory images found\n"
+      else
+          factory.each do |href|
+            fw = Firmware.new
+            fw.factory = firmware_base + "factory/" + href
 
-        href.match(FIRMWARE_REGEX) do |m|
-          fw.basename = m[1]
-          fw.version = m[3]
-          fw.model = m[4]
+            href.match(FIRMWARE_REGEX) do |m|
+              fw.basename = m[1]
+              fw.version = m[3]
+              fw.model = m[4]
 
-          fw.model.match(HWREV_REGEX) do |m|
-            fw.model = m[1]
-            fw.hwrev = m[3]
+              fw.model.match(HWREV_REGEX) do |m|
+                fw.model = m[1]
+                fw.hwrev = m[3]
+              end
+            end
+
+            firmwares[fw.basename] = fw
           end
-        end
-
-        firmwares[fw.basename] = fw
       end
+      
+      if factory.nil?
+          print "ERROR: no sysupgrades found\n"
+      else
+            sysupgrade.each do |href|
+            path = firmware_base + "sysupgrade/" + href
 
-      sysupgrade.each do |href|
-        path = firmware_base + "sysupgrade/" + href
+            href.match(FIRMWARE_REGEX) do |m|
+              basename = m[1].chomp "-sysupgrade"
 
-        href.match(FIRMWARE_REGEX) do |m|
-          basename = m[1].chomp "-sysupgrade"
-
-          if firmwares.has_key? basename
-            firmwares[basename].sysupgrade = path
+              if firmwares.has_key? basename
+                firmwares[basename].sysupgrade = path
+              end
+            end
           end
-        end
       end
+      
 
       models = firmwares.values.group_by do |fw|
         ModelDB.model(fw.model)

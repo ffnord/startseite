@@ -27,8 +27,8 @@ community:
   geo_lat: 40.5
   geo_lon: -74.1
 
-firmware:
-  base: "http://gothamcity.freifunk.net/firmware/stable/"
+firmware: # something like http://gothamcity.freifunk.net/firmware/stable/
+  base: "http://add URL to your firmware here/"
   type: "gluon"
 
   # URL to the site repo (gitweb,github...)
