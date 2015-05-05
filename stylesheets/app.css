@@ -25,6 +25,22 @@ div.header {
   background-repeat:no-repeat;
 }
 
+
+@media only screen and (max-width: 970px) {
+  #flash_placeholder {
+    background: #333;
+  }
+}
+
+@media only screen and (max-width: 755px) {
+  #flash_placeholder {
+    background: url('../images/flash_placeholder.png');
+    min-height:auto;
+    margin-bottom:-5px;
+    background-repeat:no-repeat;
+  }
+}
+
 @media only screen and (max-width: 570px) {
   div.header {
     background: transparent !important;
