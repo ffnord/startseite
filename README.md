@@ -42,13 +42,13 @@ to your master branch and please push those back to the archive.
 The complete directory structure of what (under Debian/Ubuntu) should reside 
 under `/path/to/www` will be built from the templates provided by
 
-	jekyll ../build
+	jekyll build
 
-so it is stored in the local folder `build` outside of this repository. If
-something analogous to `rm -r /path/to/www; mv build /path/to/www` is not
+so it is stored in the folder `_site` inside this repository. If
+something analogous to `rm -r /path/to/www; mv _site /path/to/www` is not
 possible, you may decided for something like
 
-	(cd build && tar cf - .)|(cd /path/to/www && sudo tar xf -)
+	(cd _site && tar cf - .)|(cd /path/to/www && sudo tar xf -)
 
 to have the data transferred without deleting independent contributions.
 
@@ -65,6 +65,13 @@ sites-enabled:
 		ServerName freifunk.localhost
 		DocumentRoot /path/to/www/
 	</VirtualHost>
+
+Or just start a SimpleHTTPServer with python:
+
+    cd _site/
+    python -m SimpleHTTPServer 8000
+    
+This will serve the `_site` folder on port http://localhost:8000
 
 
 Aftermath
