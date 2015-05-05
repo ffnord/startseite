@@ -48,6 +48,10 @@ div.header {
   }
 }
 
+.firmwarelist {
+	min-width:90%;
+}
+
 footer {
   background: #fafafa;
   margin-top: 1em;
