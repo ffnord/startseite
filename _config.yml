@@ -29,6 +29,8 @@ community:
 
 firmware: # something like http://gothamcity.freifunk.net/firmware/stable/
   base: "http://add URL to your firmware here/"
+  version: "0.7"
+  prefix: "gluon-ffgc"
   type: "gluon"
 
   # URL to the site repo (gitweb,github...)

@@ -13,41 +13,49 @@ layout: base
 <div class="row">
   <div class="eight columns">
     <p>Hier findest du eine Liste unterstützter Router-Modelle und ihre entsprechenden Firmwares.</p>
+
+    <p><strong>Aktuelle Firmware-Version: {{ site.firmware.version }}</strong></p>
   </div>
 </div>
 
 <div class="row">
   <div class="eight columns">
-    {% for make in page.makes %}
-    <h2>{{ make[0] }}</h2>
-    <table class="firmwarelist">
+    {% for groups in site.firmwares %}
+    <h2>{{ groups[0] }}</h2>
+    <table>
       <thead>
         <tr>
-          <th>Model</th>
+          <th>Modell</th>
           <th>Erstinstallation</th>
           <th>Upgrade</th>
         </tr>
       </thead>
       <tbody>
-        {% for model in make[1] %}
+        {% for model in groups[1] %}
         <tr>
           <td>
             {{ model[0] }}
           </td>
           <td>
             {% for fw in model[1] %}
-            {% if model[1].size > 1 %}
-            <strong>v{{ fw.hwrev }}:</strong>
+            {% if fw[1].factory %}
+            {% if fw[0] %}
+            <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw.factory }}">factory-{{ fw.version }}</a><br/>
+            <a href="{{ fw[1].factory }}">factory</a>
+            {% endif %}
+            <br/>
             {% endfor %}
           </td>
           <td>
             {% for fw in model[1] %}
-            {% if model[1].size > 1 %}
-            <strong>v{{ fw.hwrev }}:</strong>
+            {% if fw[1].sysupgrade %}
+            {% if fw[0] %}
+            <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw.sysupgrade }}">sysupgrade-{{ fw.version }}</a><br/>
+            <a href="{{ fw[1].sysupgrade }}">sysupgrade</a>
+            {% endif %}
+            <br/>
             {% endfor %}
           </td>
         </tr>

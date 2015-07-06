@@ -3,170 +3,255 @@ require 'uri'
 require 'nokogiri'
 require 'pp'
 
-FIRMWARE_REGEX = /^gluon-((\w+)-([\d\.]+)-([\w-]+))(\.0)*\.bin$/
-HWREV_REGEX = /^(.+)-(v|rev-)([\w\.]+)$/
+GROUPS = {
+  "Allnet" => {
+    models: [
+      "ALL0315N"
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "Buffalo" => {
+    models: [
+      "WZR-HP-AG300H/WZR-600DHP",
+      "WZR-HP-G450H",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "D-Link" => {
+    models: [
+      "DIR-615",
+      "DIR-825",
+    ],
+    extract_rev: lambda { |model, suffix| /^-rev-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1].upcase },
+  },
+  "GL-iNet" => {
+    models: [
+      "6408A",
+      "6416A",
+    ],
+    extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+  },
+  "Linksys" => {
+    models: [
+      "WRT160NL",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "NETGEAR" => {
+    models: [
+      "WNDR3700",
+      "WNDR3800",
+      "WNDR4300",
+      "WNDRMAC"
+    ],
+    extract_rev: lambda { |model, suffix| /^(.*?)(?:-sysupgrade)?\.[^.]+$/.match(suffix)[1].sub(/^$/, 'v1') },
+  },
+  "TP-Link" => {
+    models: [
+      "CPE210",
+      "CPE220",
+      "CPE510",
+      "CPE520",
+      "TL-MR3020",
+      "TL-MR3040",
+      "TL-MR3220",
+      "TL-MR3420",
+      "TL-WA701N/ND",
+      "TL-WA750RE",
+      "TL-WA801N/ND",
+      "TL-WA830RE",
+      "TL-WA850RE",
+      "TL-WA860RE",
+      "TL-WA901N/ND",
+      "TL-WDR3500",
+      "TL-WDR3600",
+      "TL-WDR4300",
+      "TL-WDR4900",
+      "TL-WR1043N/ND",
+      "TL-WR2543N/ND",
+      "TL-WR703N",
+      "TL-WR710N",
+      "TL-WR740N/ND",
+      "TL-WR741N/ND",
+      "TL-WR743N/ND",
+      "TL-WR841N/ND",
+      "TL-WR842N/ND",
+      "TL-WR941N/ND",
+    ],
+    extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+  },
+  "Ubiquiti" => {
+    models: [
+      "Bullet M",
+      "Loco M",
+      "Nanostation M",
+      "UniFi AP Pro",
+      "UniFi",
+      "UniFiAP Outdoor",
+    ],
+    extract_rev: lambda { |model, suffix|
+      rev = /^(.*?)(?:-sysupgrade)?\.bin$/.match(suffix)[1]
 
-MODELMAP = {
-  "buffalo-wzr-hp-ag300h-wzr-600dhp"         => { :make => "Buffalo", :model => "WZR-HP-AG300H/600DHP" },
-  "buffalo-wzr-hp-g450h"                     => { :make => "Buffalo", :model => "WZR-HP-G450H" },
-
-  "d-link-dir-825"           => { :make => "D-Link", :model => "DIR 825" },
-
-  "linksys-wrt160nl"         => { :make => "Linksys", :model => "WRT160NL" },
-
-  "ubiquiti-bullet-m"        => { :make => "Ubiquiti", :model => "Bullet M, Nanostation Loco M" },
-  "ubiquiti-unifi"           => { :make => "Ubiquiti", :model => "UniFi AP (LR)" },
-  "ubiquiti-nanostation-m"   => { :make => "Ubiquiti", :model => "Nanostation M" },
-  "ubiquiti-unifiap-outdoor" => { :make => "Ubiquiti", :model => "UniFi AP Outdoor" },
-
-  "tp-link-cpe210"         => { :make => "TP-Link", :model => "CPE210" },
-  "tp-link-cpe220"         => { :make => "TP-Link", :model => "CPE220" },
-  "tp-link-cpe510"         => { :make => "TP-Link", :model => "CPE510" },
-  "tp-link-cpe520"         => { :make => "TP-Link", :model => "CPE520" },
-  "tp-link-tl-mr3020"      => { :make => "TP-Link", :model => "TL-MR3020" },
-  "tp-link-tl-mr3040"      => { :make => "TP-Link", :model => "TL-MR3040" },
-  "tp-link-tl-mr3220"      => { :make => "TP-Link", :model => "TL-MR3220" },
-  "tp-link-tl-mr3420"      => { :make => "TP-Link", :model => "TL-MR3420" },
-  "tp-link-tl-wdr3500"     => { :make => "TP-Link", :model => "TL-WDR3500" },
-  "tp-link-tl-wdr3600"     => { :make => "TP-Link", :model => "TL-WDR3600" },
-  "tp-link-tl-wdr4300"     => { :make => "TP-Link", :model => "TL-WDR4300" },
-  "tp-link-tl-wa750re"     => { :make => "TP-Link", :model => "TL-WA750RE" },
-  "tp-link-tl-wa801n-nd"   => { :make => "TP-Link", :model => "TL-WA801" },
-  "tp-link-tl-wa850re"     => { :make => "TP-Link", :model => "TL-WA850RE" },
-  "tp-link-tl-wa901n-nd"   => { :make => "TP-Link", :model => "TL-WA901" },
-  "tp-link-tl-wr703n"      => { :make => "TP-Link", :model => "TL-WR703" },
-  "tp-link-tl-wr710n"      => { :make => "TP-Link", :model => "TL-WR710" },
-  "tp-link-tl-wr740n-nd"   => { :make => "TP-Link", :model => "TL-WR740" },
-  "tp-link-tl-wr741n-nd"   => { :make => "TP-Link", :model => "TL-WR741" },
-  "tp-link-tl-wr841n-nd"   => { :make => "TP-Link", :model => "TL-WR841" },
-  "tp-link-tl-wr842n-nd"   => { :make => "TP-Link", :model => "TL-WR842" },
-  "tp-link-tl-wr941n-nd"   => { :make => "TP-Link", :model => "TL-WR941" },
-  "tp-link-tl-wr1043n-nd"  => { :make => "TP-Link", :model => "TL-WR1043" },
+      if rev == '-xw'
+        'XW'
+      elsif model == 'Nanostation M' or model == 'Bullet M'
+        'XM'
+      else
+        nil
+      end
+    },
+    transform_label: lambda { |model|
+      if model == 'Bullet M' then
+        'Bullet M, Loco M'
+      elsif model == 'UniFi' then
+        'UniFi AP (LR)'
+      else
+        model
+      end
+    }
+  },
+  "x86" => {
+    models: [
+      "Generic",
+      "KVM",
+      "VirtualBox",
+      "VMware",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
 }
 
 module Jekyll
-  class ModelDB
-    def self.make(model)
-      r = MODELMAP[model]
-      if r.nil? then nil else r[:make] end
-    end
-
-    def self.model(model)
-      r = MODELMAP[model]
-      if r.nil? then nil else r[:model] end
-    end
-  end
-
   class Firmware
-    attr_accessor :basename
+    attr_accessor :group
+    attr_accessor :label
     attr_accessor :factory
     attr_accessor :sysupgrade
-    attr_accessor :version
-    attr_accessor :model
-    attr_accessor :make
     attr_accessor :hwrev
 
     def to_liquid
       {
-        "basename" => basename,
         "factory" => factory,
         "sysupgrade" => sysupgrade,
-        "version" => version,
         "hwrev" => hwrev
       }
     end
 
     def to_s
-      self.basename
+      self.label
     end
   end
 
   class FirmwareListGenerator < Generator
     def generate(site)
-      def get_files(url)
-        begin
-            printf "Fetching avaiable firmware images from %s\n",url
-            uri = URI.parse(url)
-        rescue StandardError
-            printf "ERROR: The URL %s could not be resolved\n", url
+      class << site
+        attr_accessor :firmwares
+        def site_payload
+          result = super
+          result["site"]["firmwares"] = self.firmwares
+          result
         end
-        if uri
-            response = Net::HTTP.get_response uri
-            doc = Nokogiri::HTML(response.body)
-            doc.css('a').map do |link|
-              link.attribute('href').to_s
-            end.uniq.sort.select do |href|
-              href.match(FIRMWARE_REGEX)
-            end
+      end
+
+      def get_files(url,firmware_regex)
+        uri = URI.parse(url)
+        response = Net::HTTP.get_response uri
+        doc = Nokogiri::HTML(response.body)
+        doc.css('a').map do |link|
+          link.attribute('href').to_s
+        end.uniq.sort.select do |href|
+          href.match(firmware_regex)
         end
-              
       end
 
-      firmware_base = site.config['firmware']['base']
-
-      factory = get_files(firmware_base + "factory/")
-      sysupgrade = get_files(firmware_base + "sysupgrade/")
-
-      firmwares = Hash.new
-
-      if factory.nil?
-          print "ERROR: no factory images found\n"
-      else
-          factory.each do |href|
-            fw = Firmware.new
-            fw.factory = firmware_base + "factory/" + href
-
-            href.match(FIRMWARE_REGEX) do |m|
-              fw.basename = m[1]
-              fw.version = m[3]
-              fw.model = m[4]
-
-              fw.model.match(HWREV_REGEX) do |m|
-                fw.model = m[1]
-                fw.hwrev = m[3]
-              end
-            end
-
-            firmwares[fw.basename] = fw
-          end
-      end
-      
-      if factory.nil?
-          print "ERROR: no sysupgrades found\n"
-      else
-            sysupgrade.each do |href|
-            path = firmware_base + "sysupgrade/" + href
-
-            href.match(FIRMWARE_REGEX) do |m|
-              basename = m[1].chomp "-sysupgrade"
-
-              if firmwares.has_key? basename
-                firmwares[basename].sysupgrade = path
-              end
-            end
-          end
-      end
-      
-
-      models = firmwares.values.group_by do |fw|
-        ModelDB.model(fw.model)
+      def sanitize_model_name(name)
+        name
+          .downcase
+          .gsub(/[^\w\-\.]+/, '-')
+          .gsub(/\.+/, '.')
+          .gsub(/[\-\.]*-[\-\.]*/, '-')
+          .gsub(/-+$/, '')
       end
 
-      makes = models.group_by do |k,v|
-        ModelDB.make(v.first.model)
+      def prefix_of(sub, str)
+        str[0, sub.length].eql? sub
       end
 
-      makes.each do |k,models|
-        makes[k] = Hash[ models.map do |k,v|
-          [ModelDB.model(k) || k, v.sort_by do |f|
-            f.hwrev
-          end
+      def find_prefix(name)
+        @prefixes.each do |prefix|
+          return prefix if prefix_of(prefix, name)
+        end
+
+        nil
+      end
+
+      firmwares = Hash[GROUPS.collect_concat { |group, info|
+        info[:models].collect do |model|
+          basename = site.config['firmware']['prefix'] + '-' + site.config['firmware']['version'] + '-' + sanitize_model_name(group + ' ' + model)
+          label = if info[:transform_label] then
+                    info[:transform_label].call model
+                  else
+                    model
+                  end
+          [basename,
+           {
+             :extract_rev => info[:extract_rev],
+             :model => model,
+             :revisions => Hash.new { |hash, rev|
+               fw = Firmware.new
+               fw.label = label
+               fw.group = group
+               fw.hwrev = rev
+               fw
+             },
+           }
           ]
-        end ]
+        end
+      }]
+
+      @prefixes = firmwares.keys.sort_by { |p| p.length }.reverse
+
+      firmware_regex = Regexp.new('^' + site.config['firmware']['prefix'] + '-' + site.config['firmware']['version'] + '-')
+
+      factory = get_files(site.config['firmware']['base'] + "factory/", firmware_regex)
+      sysupgrade = get_files(site.config['firmware']['base'] + "sysupgrade/", firmware_regex)
+
+      factory.each do |href|
+        basename = find_prefix href
+        suffix = href[basename.length..-1]
+        info = firmwares[basename]
+
+        hwrev = info[:extract_rev].call info[:model], suffix
+
+        fw = info[:revisions][hwrev]
+        fw.factory = site.config['firmware']['base'] + "factory/" + href
+        info[:revisions][hwrev] = fw
       end
 
-      page = site.pages.detect {|page| page.name == 'firmware.html'}
-      page.data['makes'] = makes
+      sysupgrade.each do |href|
+        basename = find_prefix href
+        suffix = href[basename.length..-1]
+        info = firmwares[basename]
+
+        hwrev = info[:extract_rev].call info[:model], suffix
+
+        fw = info[:revisions][hwrev]
+        fw.sysupgrade = site.config['firmware']['base'] + "sysupgrade/" + href
+        info[:revisions][hwrev] = fw
+      end
+
+      firmwares.delete_if { |k, v| v[:revisions].empty? }
+
+      groups = firmwares
+               .collect { |k, v| v[:revisions] }
+               .group_by { |revs| revs.values.first.label }
+               .collect { |k, v| [k, v.first.sort] }
+               .sort
+               .group_by { |k, v| v.first[1].group }
+               .to_a
+               .sort
+
+      site.firmwares = groups
     end
   end
 end
