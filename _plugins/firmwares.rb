@@ -159,7 +159,9 @@ module Jekyll
       makes.each do |k,models|
         makes[k] = Hash[ models.map do |k,v|
           [ModelDB.model(k) || k, v.sort_by do |f|
-            f.hwrev
+            if k.nil? then nil else 
+              f.hwrev
+            end
           end
           ]
         end ]
