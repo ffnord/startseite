@@ -13,11 +13,17 @@ layout: base
 <div class="row">
   <div class="eight columns">
     <p>Hier findest du eine Liste unterstützter Router-Modelle und ihre entsprechenden Firmwares.</p>
+    
+     <h4>Häufigste Modelle</h4>
+      <ul>
+        <li><a href="/firmware.html#TP-Link_TL-WR841N/ND">TL-WR841N/ND</a></li>
+        <li><a href="/firmware.html#TP-Link_TL-WR1043N/ND">TL-WR1043N/ND v2</a></li>
+        <li><a href="/firmware.html#TP-Link">CPE210</a></li>      
+      </ul>
 
     <p><strong>Aktuelle Firmware-Version: {{ site.firmware_version }}</strong></p>
   </div>
 </div>
-
 <div class="row">
   <div class="eight columns">
     {% for groups in site.firmwares %}
@@ -26,6 +32,7 @@ layout: base
     <table class="firmwarelist">
       <thead>
         <tr>
+          <th></th>
           <th>Model</th>
           <th>Erstinstallation</th>
           <th>Upgrade</th>
@@ -34,9 +41,12 @@ layout: base
       <tbody>
         {% for model in groups[1] %}
         <tr>
+          <td class="router" style="background-image:url(images/models/{{ groups[0] | slugify: 'pretty' }}-{{ model[0] | slugify: 'pretty' }}_100x60.png)"> 
+          </td>
           <td>
             <a name="{{ groups[0] }}_{{ model[0] }}"></a>
-            {{ model[0] }}
+            <strong>{{ model[0] }}</strong>
+            <br><a class="infolink" href="https://wiki.openwrt.org/toh/{{ groups[0] | slugify: 'pretty' }}/{{ model[0] | slugify: 'pretty' }}" target="_blank" title="OpenWrt Wiki">&rarr; info</a>
           </td>
           <td>
             {% for fw in model[1] %}

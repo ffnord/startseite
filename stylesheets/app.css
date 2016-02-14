@@ -80,14 +80,20 @@ h1 > .postdate {
 }
 
 /* -----------------------------------------
-   Page Name 1
+   Firmware
 ----------------------------------------- */
 
-
-
-
-/* -----------------------------------------
-   Page Name 2
------------------------------------------ */
-
-
+.router{
+  padding: 0px;
+  text-align: center;
+  width:70px;
+  height: 60px;    
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 1px solid #eeeeee;
+  background-color: white;
+}
+.infolink{
+  font-size: 0.8em;
+  padding-left: 7px;
+}
