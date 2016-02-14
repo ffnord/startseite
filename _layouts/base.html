@@ -69,7 +69,7 @@
             {% for sip in site.community.sip %}
             {{ sip }}{% if forloop.rindex > 2 %}, {% else %}{%if forloop.rindex == 2%} oder {% endif %}{% endif %}{% endfor %} <br/>
           {% endif %}
-          <strong>IRC:</strong> {{ site.community.irc }} im <a href="http://hackint.eu/">hackint</a><br/>
+          <strong>IRC:</strong> {{ site.community.irc }} im <a href="http://hackint.org">hackint</a> | <a href="https://kiwiirc.com/client/irc.eu.hackint.org/freifunk?nick=ffnord-besucher">Live Webchat</a><br/>
           {% if site.community contains 'twitter' %}
           <strong>Twitter:</strong> <a href="https://twitter.com/{{ site.community.twitter }}">@{{ site.community.twitter }}</a><br/>
           {% endif %}
