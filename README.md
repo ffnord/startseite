@@ -1,7 +1,11 @@
-ffnord startseite
-====================
+Startseite der Community Gotham City.
+=======================================
 
-Generic Homepage for FreiFunk Nord.
+Webseite: http://gotham.freifunk.net
+
+Um einen Blog Beitrag zu erstellen brauchst du keine weitere Software. Das Blog kannst du **direkt im Browser [hier auf Github](https://github.com/ deine community hier /_posts) bearbeiten**. 
+
+Um die Hauptseiten zu bearbeiten, clone dises Repository und installiere ein paar Abhängigkeiten, dann kannst du auch bei dir lokal eine Kopie erstellen und testen:
 
 Dependencies
 ------------
