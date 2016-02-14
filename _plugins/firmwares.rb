@@ -3,12 +3,15 @@ require 'uri'
 require 'nokogiri'
 require 'pp'
 
+######### Configuration ##############
 COMMUNITY_TLD = 'ffki'
-FIRMWARE_PREFIX = 'gluon-' + COMMUNITY_TLD
 FIRMWARE_VERSION = '0.7.1'
+FIRMWARE_BASE = 'http://' + COMMUNITY_TLD + '.freifunk.net/' + COMMUNITY_TLD + '-firmware/latest/'
+FIRMWARE_MIRROR = 'http://freifunk.discovibration.de/firmware/firmware-0.7.1/'
+######################################
 
+FIRMWARE_PREFIX = 'gluon-' + COMMUNITY_TLD
 FIRMWARE_REGEX = Regexp.new('^' + FIRMWARE_PREFIX + '-' + FIRMWARE_VERSION + '-')
-FIRMWARE_BASE = 'http://gluon.ffki.de/firmware/stable/'
 
 GROUPS = {
   "Allnet" => {
@@ -95,22 +98,22 @@ GROUPS = {
       "UniFi AP Pro",
       "UniFi",
       "UniFiAP Outdoor",
+      "Picostation M",
+      "Rocket M",
     ],
     extract_rev: lambda { |model, suffix|
       rev = /^(.*?)(?:-sysupgrade)?\.bin$/.match(suffix)[1]
 
       if rev == '-xw'
         'XW'
-      elsif model == 'Nanostation M' or model == 'Bullet M'
+      elsif model == 'Nanostation M' or model == 'Loco M' or model == 'Bullet M'
         'XM'
       else
         nil
       end
     },
     transform_label: lambda { |model|
-      if model == 'Bullet M' then
-        'Bullet M, Loco M'
-      elsif model == 'UniFi' then
+      if model == 'UniFi' then
         'UniFi AP (LR)'
       else
         model
@@ -157,6 +160,7 @@ module Jekyll
           result = super
           result["site"]["firmwares"] = self.firmwares
           result["site"]["firmware_version"] = FIRMWARE_VERSION
+          result["site"]["firmware_mirror"] = FIRMWARE_MIRROR
           result["site"]["community_tld"] = COMMUNITY_TLD
           result
         end
@@ -197,6 +201,7 @@ module Jekyll
       firmwares = Hash[GROUPS.collect_concat { |group, info|
         info[:models].collect do |model|
           basename = FIRMWARE_PREFIX + '-' + FIRMWARE_VERSION + '-' + sanitize_model_name(group + ' ' + model)
+          #print basename
           label = if info[:transform_label] then
                     info[:transform_label].call model
                   else
@@ -225,26 +230,34 @@ module Jekyll
 
       factory.each do |href|
         basename = find_prefix href
-        suffix = href[basename.length..-1]
-        info = firmwares[basename]
+        if basename.nil? then
+          puts "error in "+href
+        else
+          suffix = href[basename.length..-1]
+          info = firmwares[basename]
 
-        hwrev = info[:extract_rev].call info[:model], suffix
+          hwrev = info[:extract_rev].call info[:model], suffix
 
-        fw = info[:revisions][hwrev]
-        fw.factory = FIRMWARE_BASE + "factory/" + href
-        info[:revisions][hwrev] = fw
+          fw = info[:revisions][hwrev]
+          fw.factory = FIRMWARE_BASE + "factory/" + href
+          info[:revisions][hwrev] = fw
+        end
       end
 
       sysupgrade.each do |href|
         basename = find_prefix href
-        suffix = href[basename.length..-1]
-        info = firmwares[basename]
+        if basename.nil? then
+          puts "error in "+href
+        else
+          suffix = href[basename.length..-1]
+          info = firmwares[basename]
 
-        hwrev = info[:extract_rev].call info[:model], suffix
+          hwrev = info[:extract_rev].call info[:model], suffix
 
-        fw = info[:revisions][hwrev]
-        fw.sysupgrade = FIRMWARE_BASE + "sysupgrade/" + href
-        info[:revisions][hwrev] = fw
+          fw = info[:revisions][hwrev]
+          fw.sysupgrade = FIRMWARE_BASE + "sysupgrade/" + href
+          info[:revisions][hwrev] = fw
+        end
       end
 
       firmwares.delete_if { |k, v| v[:revisions].empty? }
