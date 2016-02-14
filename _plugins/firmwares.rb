@@ -6,7 +6,7 @@ require 'pp'
 ######### Configuration ##############
 COMMUNITY_TLD = 'ffki'
 FIRMWARE_VERSION = '0.7.1'
-FIRMWARE_BASE = 'http://' + COMMUNITY_TLD + '.freifunk.net/' + COMMUNITY_TLD + '-firmware/latest/'
+FIRMWARE_BASE = 'http://freifunk.in-kiel.de/' + COMMUNITY_TLD + '-firmware/latest/'
 FIRMWARE_MIRROR = 'http://freifunk.discovibration.de/firmware/firmware-0.7.1/'
 ######################################
 
