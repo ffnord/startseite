@@ -13,13 +13,15 @@ layout: base
 <div class="row">
   <div class="eight columns">
     <p>Hier findest du eine Liste unterstützter Router-Modelle und ihre entsprechenden Firmwares.</p>
+
+    <p><strong>Aktuelle Firmware-Version: {{ site.firmware_version }}</strong></p>
   </div>
 </div>
 
 <div class="row">
   <div class="eight columns">
-    {% for make in page.makes %}
-    <h2>{{ make[0] }}</h2>
+    {% for groups in site.firmwares %}
+    <h2>{{ groups[0] }}</h2>
     <table class="firmwarelist">
       <thead>
         <tr>
@@ -29,25 +31,31 @@ layout: base
         </tr>
       </thead>
       <tbody>
-        {% for model in make[1] %}
+        {% for model in groups[1] %}
         <tr>
           <td>
             {{ model[0] }}
           </td>
           <td>
             {% for fw in model[1] %}
-            {% if model[1].size > 1 %}
-            <strong>v{{ fw.hwrev }}:</strong>
+            {% if fw[1].factory %}
+            {% if fw[0] %}
+            <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw.factory }}">factory-{{ fw.version }}</a><br/>
+            <a href="{{ fw[1].factory }}">factory</a>
+            {% endif %}
+            <br/>
             {% endfor %}
           </td>
           <td>
             {% for fw in model[1] %}
-            {% if model[1].size > 1 %}
-            <strong>v{{ fw.hwrev }}:</strong>
+            {% if fw[1].sysupgrade %}
+            {% if fw[0] %}
+            <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw.sysupgrade }}">sysupgrade-{{ fw.version }}</a><br/>
+            <a href="{{ fw[1].sysupgrade }}">sysupgrade</a>
+            {% endif %}
+            <br/>
             {% endfor %}
           </td>
         </tr>
@@ -55,14 +63,15 @@ layout: base
       </tbody>
     </table>
     {% endfor %}
+
     <p>
-    Die {{ site.community.name }}er Freifunk-Firmware ist Freie Software. Sie basiert auf dem <a href="https://github.com/freifunk-gluon/gluon">Gluon-Framework</a> und <a href="https://openwrt.org/">OpenWRT</a> und darf nach den Bestimmungen der <a href="https://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License</a> weiterverteilt und verändert werden.
+    Die Freifunk-Firmware ist Freie Software. Sie basiert auf dem <a href="https://github.com/freifunk-gluon/gluon">Gluon-Framework</a> und <a href="https://openwrt.org/">OpenWrt</a> und darf nach den Bestimmungen der <a href="https://www.gnu.org/licenses/gpl-2.0.html">GNU General Public License</a> weiterverteilt und verändert werden.
     </p>
     <p>Das Gluon-Site-Repository befindet sich unter <a href="{{ site.firmware.gluon_site }}">{{ site.firmware.gluon_site }}</a>.</p>
   </div>
   <div class="four columns panel">
-    <h5>Hardware-Versionen</h5>
-    <p>Bei einigen Modellen gibt es mehrere Hardware-Versionen. Ist dies bei deinem Modell der Fall, musst du die entsprechende Firmware anhand des Typenschilds unter dem Knoten auswählen.</p>
+    <h5>Hardware Versionen</h5>
+    <p>Bei einigen Modellen gibt es mehrere Hardware Versionen. Ist dies bei deinem Modell der Fall, musst du die entsprechende Firmware anhand des Typenschilds unter dem Knoten auswählen.</p>
     <p>Dieses Bild zeigt das Typenschild eines TP-Link TL-WR1043ND. Die Versionsangabe ist gelb markiert:</p>
     <a href="images/hardwareversion.png">
       <img src="images/hardwareversion.png" />
