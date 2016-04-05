@@ -48,7 +48,7 @@
         <li><a href="/firmware.html">Firmware</a></li>
         <li><a href="/treffen.html">Treffen</a></li>
         <li><a href="{{ site.community.url_wiki }}">Wiki</a></li>
-        <li><a href="https://kiwiirc.com/client/irc.eu.hackint.org:/freifunk?nick=ffnord-besucher" target="_blank">Webchat</a></li>
+        <li><a href="https://vector.eclabs.de/#/room/#hackint_#ffnord:matrix.eclabs.de" target="_blank">Webchat</a></li>
         <li><a href="https://forum.freifunk.net/c/meta-community/ffnord" target="_blank">Forum</a></li>
       </ul>
     </div>
@@ -71,7 +71,7 @@
             {% for sip in site.community.sip %}
             {{ sip }}{% if forloop.rindex > 2 %}, {% else %}{%if forloop.rindex == 2%} oder {% endif %}{% endif %}{% endfor %} <br/>
           {% endif %}
-          <strong>IRC:</strong> {{ site.community.irc }} im <a href="http://hackint.org">hackint</a> | <a href="https://kiwiirc.com/client/irc.eu.hackint.org/freifunk?nick=ffnord-besucher">Live Webchat</a><br/>
+          <strong>IRC:</strong> {{ site.community.irc }} im <a href="http://hackint.org">hackint</a> | <a href="https://vector.eclabs.de/#/room/#hackint_#ffnord:matrix.eclabs.de">Live Webchat</a><br/>
           {% if site.community contains 'twitter' %}
           <strong>Twitter:</strong> <a href="https://twitter.com/{{ site.community.twitter }}">@{{ site.community.twitter }}</a><br/>
           {% endif %}
