@@ -75,6 +75,10 @@ h1 > .postdate {
   font-style: italic;
 }
 
+.entry-content li{
+  margin-left: 2em;
+  text-indent: -1em; 
+}
 /* -----------------------------------------
    Firmware
 ----------------------------------------- */
