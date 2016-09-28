@@ -48,10 +48,6 @@ div.header {
   }
 }
 
-.firmwarelist {
-	min-width:90%;
-}
-
 footer {
   background: #fafafa;
   margin-top: 1em;
@@ -96,4 +92,13 @@ h1 > .postdate {
 .infolink{
   font-size: 0.8em;
   padding-left: 7px;
+}
+
+.firmwarelist {
+  min-width:90%;
+}
+
+#firmware-info-box a{
+  font-size: 12px;
+  word-wrap: break-word;
 }
