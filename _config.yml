@@ -8,6 +8,7 @@ community:
 
   # Custom URLs
   url_wiki:  "/wiki"
+  url_webchat: "https://riot.eclabs.de/#/room/#hackint_#ffnord:matrix.eclabs.de"
   url_geomap: "/map/geomap.html"
   url_graph: "/map/graph.html"
   url_nodelist: "/wiki/Knoten"
