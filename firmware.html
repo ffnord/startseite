@@ -62,7 +62,7 @@ layout: base
             {% if fw[0] %}
             <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw[1].factory }}">factory</a>
+            <a href="{{ fw[1].factory }}">Firmware</a>
             {% endif %}
             <br/>
             {% endfor %}
@@ -73,7 +73,7 @@ layout: base
             {% if fw[0] %}
             <strong>{{ fw[0] }}:</strong>
             {% endif %}
-            <a href="{{ fw[1].sysupgrade }}">sysupgrade</a>
+            <a href="{{ fw[1].sysupgrade }}">Upgrade{% if fw[1].factory %}{% else %}=Firmware{% endif %}</a>
             {% endif %}
             <br/>
             {% endfor %}
