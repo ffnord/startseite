@@ -1,7 +1,7 @@
-Startseite der Community Gotham City.
-=======================================
+Startseite der Community Freifunk Alpha Centauri
+================================================
 
-Webseite: http://gotham.freifunk.net
+Webseite: http://alpha-centauri.freifunk.net
 
 Um einen Blog Beitrag zu erstellen brauchst du keine weitere Software. Das Blog kannst du **direkt im Browser [hier auf Github](https://github.com/ deine community hier /_posts) bearbeiten**. 
 
@@ -10,18 +10,16 @@ Um die Hauptseiten zu bearbeiten, clone dises Repository und installiere ein paa
 Dependencies
 ------------
 
-* ruby
+* ruby2.0
+* bundler
 
-### Gems
+Install
+-------
 
-* nokogiri
-* jekyll
-* json
-
-On Ubuntu/Debian:
-
-    sudo apt-get install ruby-nokogiri
-    sudo gem install json jekyll
+    git clone <repo-url> startseite
+    cd startseite/
+    gem install bundler
+    bundle install
 
 Customization
 -------------
@@ -50,9 +48,14 @@ under `/path/to/www` will be built from the templates provided by
 
 	jekyll build
 
-so it is stored in the folder `_site` inside this repository. If
-something analogous to `rm -r /path/to/www; mv _site /path/to/www` is not
-possible, you may decided for something like
+On Ubuntu you might need to ensure the right environment with
+
+        bundle exec jekyll build
+
+The generated static pages will be stored in the subfolder `_site/`, that you
+should move somewhere outside of this repository. If something analogous to
+`rm -r /path/to/www; mv _site /path/to/www` is not possible, you may decided for
+something like
 
 	(cd _site && tar cf - .)|(cd /path/to/www && sudo tar xf -)
 
