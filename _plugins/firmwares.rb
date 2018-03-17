@@ -25,12 +25,18 @@ GROUPS = {
       "AP121",
       "AP121U",
       "Hornet-UB",
+      "Network-N2-N5",
+      "Network-Tube2H",
+      "Network-AP121",
+      "Network-AP121U",
+      "Network-Hornet-UB"
     ],
+    #FIXME: alfa-networks to alfa in OpenWRT Wiki info links and Router node pictures
     extract_rev: lambda { |model, suffix| nil },
   },
   "Allnet" => {
     models: [
-      "ALL0315N"
+      "ALL0315N",
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
@@ -48,8 +54,9 @@ GROUPS = {
       "DIR-505",
       "DIR-615",
       "DIR-825",
+      "DIR-860L",
     ],
-    extract_rev: lambda { |model, suffix| /^-rev-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1].upcase },
+    extract_rev: lambda { |model, suffix| /^-((rev-|b).+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
   },
   "GL-iNet" => {
     models: [
@@ -57,6 +64,20 @@ GROUPS = {
       "6416A",
     ],
     extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+  },
+  "GL" => { #this one is also GL.inet
+    models: [
+      "AR150",
+    ],
+    extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+  },
+  "Lemaker" => {
+    models: [
+      "Banana-PI",
+      "Banana-PRO",
+      "Lamobo-R1",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
   },
   "Linksys" => {
     models: [
@@ -73,12 +94,20 @@ GROUPS = {
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
+  "MikroTik" => {
+    models: [
+      "rootfs",
+      "vmlinux-lzma",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
   "NETGEAR" => {
     models: [
       "WNDR3700",
       "WNDR3800",
       "WNDR4300",
-      "WNDRMAC"
+      "WNDRMAC",
+      "WNR2200", # nur sysupgrade
     ],
     extract_rev: lambda { |model, suffix| /^(.*?)(?:-sysupgrade)?\.[^.]+$/.match(suffix)[1].sub(/^$/, 'v1') },
   },
@@ -97,8 +126,17 @@ GROUPS = {
       "OM2P-LC",
       "OM5P",
       "OM5P-AN",
+      "mr1750",
+      "mr1750v2",
     ],
     extract_rev: lambda { |model, suffix| /^(.*?)(?:-sysupgrade)?\.[^.]+$/.match(suffix)[1].sub(/^$/, 'v1') },
+  },
+  "Raspberry Pi" => {
+    models: [
+      "",
+      "2"
+    ],
+    extract_rev: lambda { |model, suffix| nil },
   },
   "TP-Link" => {
     models: [
@@ -135,6 +173,7 @@ GROUPS = {
       "TL-WR841N/ND",
       "TL-WR842N/ND",
       "TL-WR843N/ND",
+      "TL-WR940N",
       "TL-WR940N/ND",
       "TL-WR941N/ND",
     ],
@@ -163,27 +202,30 @@ GROUPS = {
 
       if rev == '-xw'
         'XW'
-      elsif model == 'Nanostation M' or model == 'Nanostation-Loco M' or model == 'Bullet M'
+      elsif model == 'Nanostation M' or model == 'Loco M' or model == 'Nanostation-Loco M' or model == 'Bullet M'
         'XM'
       else
         nil
       end
     },
     transform_label: lambda { |model|
-      #if model == 'Bullet M' then
-      #  'Bullet M, Loco M'
-      #els
       if model == 'UniFi' then
         'UniFi AP (LR)'
       else
         model
       end
-    }
+    },
   },
-  "wd-my-net" => {
+  "VoCore" => {
     models: [
-      "N600",
-      "N750",
+      "",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "WD" => {
+    models: [
+      "My-Net-N600",
+      "My-Net-N750",
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
