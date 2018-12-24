@@ -108,6 +108,14 @@ layout: base
     <p>Das Gluon-Site-Repository befindet sich unter <a href="{{ site.firmware.gluon_site }}">{{ site.firmware.gluon_site }}</a>.</p>
   </div>
   <div class="four columns panel">
+    <h5>Firmware Erstellung<a name="erstellung" href="#erstellung">&nbsp;&nbsp;&nbsp;&nbsp;</a></h5>
+    <p>
+    	Beim Bauen der Firmware werden die Commit-Ids des gluon Repositories und des Site-Konfigurations-Repositories in der Firmware verankert.
+    	Diese Ids kann man in der Startseite der Erweiterten Einstellungen im Config Mode ersehen. Die Git Id ist genau der Commit auf dem die Firmware gebaut wurde.
+    	Falls dort ein Plus (+) am Ende erscheint ist dies der "Dirty"-Flag. Die Id wurde erzeugt mit <pre>git describe --always --dirty=+</pre>
+    </p>
+  </div>
+  <div class="four columns panel">
     <h5>Nutzungsbedingungen</h5>
     <p>Für die Verwendung der Freifunk Firmware in Verbindung mit dem angebotenem Übergang ins Internet gelten unsere <a href="/nutzungsbedingungen.html">Nutzungsbedingungen</a>.</p>
   </div>
