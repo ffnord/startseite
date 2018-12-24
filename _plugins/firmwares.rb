@@ -1,3 +1,8 @@
+#!/usr/bin/ruby
+
+# error handling for "undefined method `[]' for nil:NilClass (NoMethodError)" with
+# jekyll build --trace
+
 require 'net/http'
 require 'uri'
 require 'nokogiri'
@@ -13,10 +18,27 @@ FIRMWARE_MIRROR = 'http://freifunk.discovibration.de/firmware/firmware-0.7.1/'
 FIRMWARE_PREFIX = 'gluon-' + COMMUNITY_TLD
 FIRMWARE_REGEX = Regexp.new('^' + FIRMWARE_PREFIX + '-' + FIRMWARE_VERSION + '-')
 
+# {} ist ein hash
+# [] ist ein array
+# foo: weist den key :foo im hash zu
+# "foo" => ist äquivalent mit foo: aber kann auch sonderzeichen enthalten (das ganze aber erst in zukunft, ab ruby 2.3)
+# lambda ist eine spezielle anonyme funktion
 GROUPS = {
   "8Devices" => {
     models: [
       "Carambola2-Board",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "A5" => {
+    models: [
+      "v11",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "AVM" => {
+    models: [
+      "FRITZ-BOX-4020",
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
@@ -56,7 +78,7 @@ GROUPS = {
       "DIR-825",
       "DIR-860L",
     ],
-    extract_rev: lambda { |model, suffix| /^-((rev-|b).+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+    extract_rev: lambda { |model, suffix| /^-(((rev-|)|b).+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
   },
   "GL-iNet" => {
     models: [
@@ -68,6 +90,11 @@ GROUPS = {
   "GL" => { #this one is also GL.inet
     models: [
       "AR150",
+      "AR300M",
+      "AR750",
+      "MT300A",
+      "MT300N",
+      "MT750",
     ],
     extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
   },
@@ -119,6 +146,8 @@ GROUPS = {
   },
   "OpenMesh" => {
     models: [
+      "A40",
+      "A60",
       "MR600",
       "MR900",
       "OM2P",
@@ -141,11 +170,18 @@ GROUPS = {
   "TP-Link" => {
     models: [
       "ARCHER-C5",
+      "ARCHER-C59",
       "ARCHER-C7",
       "CPE210",
       "CPE220",
       "CPE510",
       "CPE520",
+      "RE450",
+      "TL-WA7210N",
+      "TL-WA730RE",
+      "TL-WR1043N",
+      "WBS210",
+      "WBS510",
       "TL-MR13U",
       "TL-MR3020",
       "TL-MR3040",
@@ -177,23 +213,44 @@ GROUPS = {
       "TL-WR940N/ND",
       "TL-WR941N/ND",
     ],
-    extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+    #            lambda macht nur, dass es jedes mal ausgeführt wird
+    extract_rev: lambda { |model, suffix| rev = /^(?:-(?!sysupgrade)(.+?))?(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
   },
+  "Ubnt" => {
+    models: [
+      "erx",
+      "erx-sfp",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+
   "Ubiquiti" => {
     models: [
       "Airgateway",
+      "Airgateway LR",
+      "Airgateway Pro",
       "Airrouter",
+      "Bullet M",
+      "Bullet M2",
+      "Bullet M5",
       "Loco M",
       "Nanostation-Loco M2",
       "Nanostation-Loco M5",
-      "Bullet M",
       "LS-SR71", #LiteStation-SR71
       "Nanostation M",
+      "Nanostation M2",
       "Nanostation M5",
-      "Picostation M",
+      "Picostation M2",
       "Rocket M",
-      "Rocket M XW",
+      "Rocket M2",
+      "Rocket M5",
+      "UniFi AC Lite",
+      "UniFi AC LR",
+      "UniFi AC Mesh",
+      "UniFi AC Pro",
+      "UniFi AP LR",
       "UniFi AP Pro",
+      "UniFi AP",
       "UniFi",
       "UniFiAP Outdoor",
     ],
@@ -202,19 +259,23 @@ GROUPS = {
 
       if rev == '-xw'
         'XW'
-      elsif model == 'Nanostation M' or model == 'Loco M' or model == 'Nanostation-Loco M' or model == 'Bullet M'
+      elsif rev == '-xm'
         'XM'
+      elsif rev == '-ti'
+        'TI'
+      elsif rev == '+'
+        '+'
       else
         nil
       end
     },
-    transform_label: lambda { |model|
-      if model == 'UniFi' then
-        'UniFi AP (LR)'
-      else
-        model
-      end
-    },
+    # transform_label: lambda { |model|
+    #   if model == 'UniFi' then
+    #     'UniFi AP (LR)'
+    #   else
+    #     model
+    #   end
+    # },
   },
   "VoCore" => {
     models: [
@@ -233,6 +294,7 @@ GROUPS = {
     models: [
       "64",
       "Generic",
+      "Geode",
       "KVM",
       "VirtualBox",
       "VMware",
@@ -240,6 +302,12 @@ GROUPS = {
       "64-VMware",
       "xen",
       "x86-64",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "Zyxel" => {
+    models: [
+      "nbg6716",
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
@@ -338,12 +406,16 @@ module Jekyll
         end
       }]
 
-      @prefixes = firmwares.keys.sort_by { |p| p.length }.reverse
+      # sort_by erwartet einen block in dem auf jedes Element eine funktion angewendet wird: .length  
+      #@prefixes = firmwares.keys.sort_by { |p| p.length }.reverse
+      @prefixes = firmwares.keys.sort_by(&:length).reverse
 
       factory = get_files(FIRMWARE_BASE + "factory/")
       sysupgrade = get_files(FIRMWARE_BASE + "sysupgrade/")
 
       factory.each do |href|
+	# for debugging:
+	#puts "search " + href
         basename = find_prefix href
         if basename.nil? then
           puts "error in "+href

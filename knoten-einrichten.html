@@ -1,7 +1,11 @@
 ---
 layout: base
 ---
-
+<style type="text/css">
+    figure{
+        padding-bottom: 2em;
+    }
+</style>
 <div class="heading">
   <div class="row">
     <div class="twelve columns">
@@ -13,14 +17,21 @@ layout: base
 <div class="row">
   <div class="twelve columns">
     <p>Für die Einrichtung des Knotens werden keine technischen Kenntnisse benötigt. Wenn du dieser Anleitung Schritt
-    für Schritt folgst, kann eigentlich nichts schiefgehen. Anschließend läuft das Freifunk WLAN und ist für alle in
-    der Nähe als offenes WLAN mit der SSID "{{ site.gluon_site.wifi24.ssid }}" zu sehen.</p>
+      für Schritt folgst, kann eigentlich nichts schiefgehen. Anschließend läuft das Freifunk WLAN und ist für alle in
+      der Nähe als offenes WLAN mit der SSID "{{ site.gluon_site.wifi24.ssid }}" zu sehen.
+    </p>
 
     <p>
-    Die Knoten im Freifunknetz benutzen ein eigenes Betriebssystem.
-    Dieses sollte auf deinem Router installiert sein.
-    Ob das so ist, erfährst du von dem Freifunker, von dem du das Gerät bekommen hast.
-    Sollte dein Knoten noch nicht das Freifunk-Betriebssystem installiert hat, findest du hier eine Schritt-für-Schritt-Anleitung.
+      Die Knoten im Freifunknetz benutzen ein eigenes Betriebssystem (die Freifunk Firmware "Gluon")
+      Dieses sollte auf deinem Router installiert sein.
+      Ob das so ist, erfährst du von dem Freifunker, von dem du das Gerät bekommen hast.
+      Sollte dein Knoten noch nicht das Freifunk-Betriebssystem installiert haben, findest du hier eine Schritt-für-Schritt-Anleitung:
+      <a href="https://hamburg.freifunk.net/wp-content/uploads/2013/09/Anleitung-firmware-einspielen.pdf">Anleitung zum Firmware einspielen</a>.
+    </p>
+
+    <p>Die meißten Router kann man einfach unter der Adresse <a href="http://192.168.0.1" target="_blank">http://192.168.0.1</a> im Browser
+      erreichen. Ausnahmen: Gl.inet: 192.168.8.1, Ubiquiti: 192.168.1.20. Dort findet ihr, meißt in den Erweiterten Einstellungen,
+      einen Punkt "Firmware upgrade". Wählt die vorher heruntergeladene Freifunk Firmware Datei aus und wartet bis das Gerät neu gestartet ist.
     </p>
 
     <h2>Knoten einrichten</h2>
@@ -91,7 +102,8 @@ layout: base
     wird im alltäglichen Betrieb nicht allzu viel von deiner Bandbreite in Anspruch nehmen. Unsere Empfehlung ist
     deshalb, die Begrenzung nicht zu aktivieren. Solltest du aber trotzdem eine Begrenzung eintragen wollen, setze
     den Haken "Mesh-VPN Bandbreite begrenzen" und trage in die beiden Felder darunter die gewünschten Limits
-    ein. Die Minimalwerte sind 1000 im oberen und 100 im unteren Feld.</p>
+    ein. Sinnvolle Werte sind 4000 (kbit/s) im oberen (Download) und 1000 im unteren Feld (Upload) 
+    </p>
 
     <h3>Schritt 5: Standort</h3>
 
@@ -138,8 +150,8 @@ layout: base
 
     <p>
     Hast du Mesh-VPN nicht aktiviert, werden diese Daten nicht angezeigt und du brauchst keine Mail versenden.
-    Wenn du möchtest, kannst du dich und deinen neuen Knoten aber trotzdem gerne auf der 
-    Mailingliste <a href="mailto:{{ site.community.mail_discussion }}">{{ site.community.mail_discussion }}</a> bekannt machen.
+    Es wäre aber nett, wenn du dich und deinen neuen Knoten auf der 
+    Mailingliste <a href="mailto:{{ site.community.mail_discussion }}">{{ site.community.mail_discussion }}</a> bekannt machst.
     </p>
 
     <figure>
@@ -151,8 +163,8 @@ layout: base
     <h3>Schritt 8: Knoten ans Internet anschließen</h3>
 
     <p>Nun kannst du den Knoten ans Internet anschließen. Dazu musst du das LAN-Kabel auf der Rückseite deines
-    Knoten umstecken: Bisher hattest du das Kabel in der gelben Buchse. Jetzt muss es in die blaue. Verbinde
-    dann noch das andere Ende des Kabels mit deinem Internet-Router und dein neuer Freifunkknoten ist am Netz.</p>
+    Knoten umstecken: Bisher hattest du das Kabel in der gelben Buchse. Jetzt muss es in die <b>blaue</b>. Verbinde
+    dann noch das andere Ende des Kabels mit deinem Internet-Router und dein neuer Freifunkknoten ist am Netz. (Falls du den Router am Gastzugang deines Internet-Routers anschließt, achte darauf, dass der Mesh-VPN Port für UPD offen ist)</p>
 
     <figure>
       <img src="images/knoten-einrichten/g4007.png" />
@@ -184,4 +196,3 @@ layout: base
 
   </div>
 </div>
-
