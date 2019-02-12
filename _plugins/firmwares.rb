@@ -80,14 +80,7 @@ GROUPS = {
     ],
     extract_rev: lambda { |model, suffix| /^-(((rev-|)|b).+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
   },
-  "GL-iNet" => {
-    models: [
-      "6408A",
-      "6416A",
-    ],
-    extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
-  },
-  "GL" => { #this one is also GL.inet
+  "GL" => {
     models: [
       "AR150",
       "AR300M",
@@ -95,8 +88,28 @@ GROUPS = {
       "MT300A",
       "MT300N",
       "MT750",
+      "iNet-6408A",
+      "iNet-6416A",
     ],
     extract_rev: lambda { |model, suffix| /^-(.+?)(?:-sysupgrade)?\.bin$/.match(suffix)[1] },
+  },
+  "La-Fonera" => {
+    models: [
+      "2.0n",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "Fonera20n" => {
+    models: [
+      "",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "Lamobo" => {
+    models: [
+      "r1",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
   },
   "Lemaker" => {
     models: [
@@ -317,6 +330,13 @@ GROUPS = {
       "KVM",
       "VirtualBox",
       "VMware",
+    ],
+    extract_rev: lambda { |model, suffix| nil },
+  },
+  "Zbt" => {
+    models: [
+      "wg3526-16m",
+      "wg3526-32m",
     ],
     extract_rev: lambda { |model, suffix| nil },
   },
