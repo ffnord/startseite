@@ -405,7 +405,7 @@ module Jekyll
       end
 
       def prefix_of(sub, str)
-        str[0, sub.length].eql? sub
+        str[0, sub.length].eql? sub and str[sub.length, 1].eql? '-'
       end
 
       def find_prefix(name)
