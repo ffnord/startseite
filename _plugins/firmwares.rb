@@ -183,11 +183,12 @@ GROUPS = {
   "TP-Link" => {
     models: [
       "ARCHER-C25",
-      "ARCHER-C5",
+      "ARCHER-C50",
       "ARCHER-C58",
       "ARCHER-C59",
       "ARCHER-C60",
       "ARCHER-C7",
+      "ARCHER-C5",
       "CPE210",
       "CPE220",
       "CPE510",
