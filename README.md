@@ -10,15 +10,30 @@ Um die Hauptseiten zu bearbeiten, clone dises Repository und installiere ein paa
 Dependencies
 ------------
 
-* ruby2.0
+* ruby2.5
+* ruby-nokogiri
+* rubygems
+
+### Gems
+
+* jekyll
+* json
 * bundler
 
 Install
 -------
 
+On Ubuntu/Debian:
+
+    sudo apt-get install ruby2.5-dev ruby-nokogiri rubygems
+    sudo apt purge ruby2.0* ruby2.1 ruby2.3 ruby2.4*
+    sudo gem install json jekyll bundler
+    #ggf.:
+    #ln -s /usr/bin/gem$VERSION$ /usr/bin/gem
+    #sudo chmod +x /usr/bin/gem
     git clone <repo-url> startseite
     cd startseite/
-    gem install bundler
+    git submodule update --init --recursive --remote
     bundle install
 
 Customization
