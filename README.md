@@ -75,6 +75,8 @@ something like
 	(cd _site && tar cf - .)|(cd /path/to/www && sudo tar xf -)
 
 to have the data transferred without deleting independent contributions.
+Caveat: Ensure not to overwrite files you may have edited manually, e.g.
+the _layouts/ffapi.json.
 
 Site
 ----
